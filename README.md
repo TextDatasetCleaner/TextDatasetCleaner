@@ -28,7 +28,8 @@
 - [ ] Понижение регистра (если вдруг кому-то это нужно)
 - [ ] Сделать удаление нечётких дубликатов через шинглы (лучше через какое-то готовое решение)
 - [ ] Удаление всех строк, которые содержат стоп-слова из заданного словаря
-- [ ] Проверка метрик читаемости текста (через [pattern.metrics](https://www.clips.uantwerpen.be/pages/pattern-metrics) или [ruTS](https://github.com/SergeyShk/ruTS) или [BERT (режим №2 по оценке натуральности/логичности текста)](https://colab.research.google.com/github/blade1780/bert/blob/master/BERT.ipynb))
+- [ ] Проверка метрик читаемости текста (через [pattern.metrics](https://www.clips.uantwerpen.be/pages/pattern-metrics) или [ruTS](https://github.com/SergeyShk/ruTS))
+- [ ] Оценка натуральности/логичности текста через [BERT (режим №2)](https://colab.research.google.com/github/blade1780/bert/blob/master/BERT.ipynb)
 - [ ] Использование готовых API для проверки орфографии через Google/Bing
 - [ ] Прикрутить использование RAMDisk для ускорения обработки
 

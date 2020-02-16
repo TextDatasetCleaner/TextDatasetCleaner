@@ -1,0 +1,6 @@
+fasttext==0.9.1
+#textacy==0.9.1
+-e git+https://github.com/chartbeat-labs/textacy.git@65abf0d0c33e3f2aa5f9dfe895727aedf12ab15b#egg=textacy
+tqdm==4.36.1
+profanity-check==1.0.3
+selectolax==0.2.1

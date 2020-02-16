@@ -55,7 +55,7 @@ mkdir -p ${ROOT}/tmp
 if [ ! -f "${ROOT}/tmp/lid.176.bin" ]
 then
     echo -e "${GREEN}Download lid.176.bin:${NC}"
-    wget https://dl.fbaipublicfiles.com/fasttext/supervised-models/lid.176.bin ${ROOT}/tmp/lid.176.bin
+    wget -O ${ROOT}/tmp/lid.176.bin https://dl.fbaipublicfiles.com/fasttext/supervised-models/lid.176.bin
 fi
 
 

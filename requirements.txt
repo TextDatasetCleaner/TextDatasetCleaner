@@ -3,3 +3,4 @@ textacy==0.10.0
 tqdm==4.36.1
 profanity-check==1.0.3
 selectolax==0.2.1
+nltk==3.4.5

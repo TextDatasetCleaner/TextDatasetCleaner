@@ -114,7 +114,7 @@ then
 fi
 
 
-echo -e "${GREEN}Calc symbols:${NC}"
+echo -e "${GREEN}Calculate symbols:${NC}"
 python calc_symbols.py datasets/${DATASET_NAME}_shuffled.txt > datasets/${DATASET_NAME}_symbols.txt
 
 
@@ -129,6 +129,17 @@ then
     echo -e "${RED}FAILED${NC}"
     exit 1
 fi
+
+
+echo -e "${GREEN}Calculate bigrams frequency:${NC}"
+python calc_symbols.py datasets/remove_line_symbols/${DATASET_NAME}_shuffled.txt > datasets/${DATASET_NAME}_bigrams.txt
+
+
+echo -e "${GREEN}Show bigrams frequency:${NC}"
+less datasets/${DATASET_NAME}_bigrams.txt
+
+
+# remove lines with bigrams much larger than average frequency?
 
 
 mv datasets/remove_line_symbols/${DATASET_NAME}_shuffled.txt datasets/${DATASET_NAME}_result.txt

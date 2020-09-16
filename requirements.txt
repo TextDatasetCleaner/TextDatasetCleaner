@@ -4,3 +4,6 @@ tqdm==4.48.0
 profanity-check==1.0.3
 selectolax==0.2.4
 nltk==3.5
+requests==2.24.0
+click==7.1.2
+PyYAML>=5.3.1

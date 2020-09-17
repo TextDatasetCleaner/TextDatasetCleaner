@@ -32,9 +32,6 @@ class Loader:
             self._remove_previous_temp(temp_file_path)
             self.input_file = temp_file_path
 
-        # after last execution remove previous file
-        self._remove_previous_temp()
-
     def line_processing(self):
         processors = []
         for processor_data in self.config['PROCESSORS']:

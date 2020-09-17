@@ -2,7 +2,10 @@ PRE_PROCESSORS:
   - unique
 PROCESSORS:
   - line_strip
-  - detect_language
+  - detect_language:
+    - language_code: en
+    - delimiter: ~
+    - delimited_position: -1
 POST_PROCESSORS:
   - unique
   - shuffle

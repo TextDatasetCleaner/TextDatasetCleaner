@@ -24,7 +24,16 @@ def run(config_file: str, input_file: str, output_file: str):
 
     # create Loader
     ldr = Loader(config, input_file, output_file)
-    # start pre processing
-    ldr.pre_processing()
 
-    print(config)
+    # start pre processing
+    ldr.file_processing('PRE_PROCESSORS')
+
+    # start processing
+    ldr.line_processing()
+
+    # start post processing
+    ldr.file_processing('POST_PROCESSORS')
+
+    ldr.finish()
+
+    print('Done')

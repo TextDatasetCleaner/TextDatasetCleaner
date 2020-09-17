@@ -37,6 +37,9 @@ def validate_processors(config: dict):
 
     for stage_name, stage_type in stage_types.items():
         for processor in config[stage_name]:
+            if isinstance(processor, dict):
+                # HACK: processor with parameters for __init__
+                processor = list(processor)[0]
             if processor not in processors_types.keys():
                 raise ValueError(f'Processor {processor} for stage {stage_name} not found!')
 
@@ -45,8 +48,8 @@ def validate_processors(config: dict):
 
 
 def validate_free_space(input_file: str, output_file: str):
-    file_size = os.path.getsize(input_file)
-    file_size *= 2.2    # peak: (input_file + cached_file) * 1,1
+    file_size = os.path.getsize(input_file)  # worst case: temp_file = input_file = output_file
+    file_size *= 2.2    # peak: (temp_file + output_file) * 1,1
 
     output_dir = os.path.dirname(output_file)
     free_space = shutil.disk_usage(output_dir).free

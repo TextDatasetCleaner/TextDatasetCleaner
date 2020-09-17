@@ -1,3 +1,6 @@
+from typing import Dict
+
+from .base import BaseProcessor
 from .detect_language import DetectLanguageProcessor
 from .line_strip import LineStripProcessor
 from .shuffle import ShuffleProcessor
@@ -12,5 +15,5 @@ __all__ = (
 )
 
 
-processors_types = {p.name: p.type for p in __all__}
-processors_dict = {p.name: p for p in __all__}
+processors_types = {p.name: p.type for p in __all__}  # type: Dict[str: str]
+processors_dict = {p.name: p for p in __all__}  # type: Dict[str: BaseProcessor]

@@ -22,7 +22,7 @@ class DetectLanguageProcessor(BaseProcessor):
         self.delimited_position = delimited_position
 
         # TODO: add project root from config
-        self.model_path = '/cache/fasttext.bin'
+        self.model_path = 'cache-fasttext.bin'
 
         if model_url is None:
             model_url = 'https://dl.fbaipublicfiles.com/fasttext/supervised-models/lid.176.bin'

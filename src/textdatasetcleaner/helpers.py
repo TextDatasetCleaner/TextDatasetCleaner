@@ -1,5 +1,11 @@
 from typing import Optional
 
+import yaml
+
+
+def load_config(path: str):
+    return yaml.safe_load(open(path))
+
 
 def get_line_piece(line: str, delimiter: Optional[str], delimited_position: int):
     if delimiter is not None:

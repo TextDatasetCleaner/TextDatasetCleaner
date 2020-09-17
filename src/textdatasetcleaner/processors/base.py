@@ -14,7 +14,7 @@ class BaseProcessor(ABC):
         """
         raise NotImplemented()
 
-    def process_file(self, file_path: str) -> bool:
+    def process_file(self, input_file: str, output_file: str) -> bool:
         raise NotImplemented()
 
     @ClassProperty

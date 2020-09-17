@@ -4,9 +4,13 @@ from .shuffle import ShuffleProcessor
 from .unique import UniqueProcessor
 
 
-processors_dict = {
-    DetectLanguageProcessor.name: DetectLanguageProcessor,
-    LineStripProcessor.name: LineStripProcessor,
-    ShuffleProcessor.name: ShuffleProcessor,
-    UniqueProcessor.name: UniqueProcessor,
-}
+__all__ = (
+    DetectLanguageProcessor,
+    LineStripProcessor,
+    ShuffleProcessor,
+    UniqueProcessor,
+)
+
+
+processors_types = {p.name: p.type for p in __all__}
+processors_dict = {p.name: p for p in __all__}

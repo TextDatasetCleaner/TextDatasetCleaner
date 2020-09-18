@@ -40,6 +40,7 @@ def validate_processors(config: dict):
             if isinstance(processor, dict):
                 # HACK: processor with parameters for __init__
                 processor = list(processor)[0]
+
             if processor not in processors_types.keys():
                 raise ValueError(f'Processor {processor} for stage {stage_name} not found!')
 

@@ -1,5 +1,6 @@
 import os
 from typing import Optional
+from pathlib import Path
 
 import requests
 from fasttext import load_model
@@ -10,7 +11,7 @@ from ..helpers import get_line_piece
 
 class DetectLanguageProcessor(BaseProcessor):
 
-    __processor_name__ = 'detect_language'
+    __processor_name__ = Path(__file__).resolve().stem
     __processor_type__ = 'line'
 
     def __init__(self, language_code: str, threshold: float = 0.9, delimiter: Optional[str] = None,

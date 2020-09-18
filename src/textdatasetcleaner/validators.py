@@ -1,7 +1,7 @@
 import os
 import shutil
 
-from .processors import processors_types
+from .processors import processors_types, processors_dict
 
 
 def check_output_file_not_exists(path: str):
@@ -37,15 +37,32 @@ def validate_processors(config: dict):
 
     for stage_name, stage_type in stage_types.items():
         for processor in config[stage_name]:
+            params = {}
+            processor_name = processor
             if isinstance(processor, dict):
                 # HACK: processor with parameters for __init__
-                processor = list(processor)[0]
+                processor_name = list(processor)[0]
+                params = processor[processor_name]
 
-            if processor not in processors_types.keys():
-                raise ValueError(f'Processor {processor} for stage {stage_name} not found!')
+            if processor_name not in processors_types.keys():
+                raise ValueError(f'Processor {processor_name} for stage {stage_name} not found!')
 
-            if processors_types[processor] != stage_type:
-                raise ValueError(f'Processor {processor} for stage {stage_name} must be a {stage_type}-typed processor')
+            if processors_types[processor_name] != stage_type:
+                raise ValueError(f'Processor {processor_name} for stage {stage_name} '
+                                 f'must be a {stage_type}-typed processor')
+
+            # try create processor for check errors in initialization
+            try:
+                proc = processors_dict[processor_name](**params)
+            except TypeError as e:
+                message = str(e)
+                # FIXME: hack for tell processor name
+                message = message.replace('__init__()', f'{processor_name} processor')
+                message = f'{message} for __init__ method'
+                # TODO: own exc
+                raise TypeError(message)
+            finally:
+                del proc
 
 
 def validate_free_space(input_file: str, output_file: str):

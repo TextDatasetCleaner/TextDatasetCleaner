@@ -12,7 +12,7 @@ class ShuffleProcessor(BaseProcessor):
     # TODO: add timeout in __init__
 
     def process_file(self, input_file: str, output_file: str) -> bool:
-        # BSD shuffle very fast
+        # GNU shuf very fast
 
         with open(input_file, encoding='utf-8') as fdr:
             p1 = subprocess.Popen(['shuf', '-o', output_file], stdin=fdr)

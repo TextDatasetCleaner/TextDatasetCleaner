@@ -55,14 +55,17 @@ class Loader:
         with open(self.input_file, encoding='utf-8') as fdr, open(temp_file_path, 'w', encoding='utf-8') as fdw:
             # TODO: tqdm + logger.debug
             for line in fdr:
+                if not line:
+                    continue
+
                 for processor in processors:
                     line = processor.process_line(line)
                     if line is None:
-                        continue
+                        break
 
                 # save after all processors
                 if line is not None:
-                    fdw.write(line)
+                    fdw.write(line + '\n')
 
         # TODO: check need remove old input_file
         self.input_file = temp_file_path

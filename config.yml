@@ -3,7 +3,7 @@ PRE_PROCESSORS:
 PROCESSORS:
   - line_strip
   - detect_language:
-      language_code: en
+      language_code: ru
       delimiter: '~'
       delimited_position: -1
 POST_PROCESSORS:

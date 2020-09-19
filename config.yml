@@ -11,6 +11,7 @@ PROCESSORS:
   - filter_textacy
   - filter_profanity:
       threshold: 0.9
+  - clean_misc
 POST_PROCESSORS:
   - unique
   - shuffle

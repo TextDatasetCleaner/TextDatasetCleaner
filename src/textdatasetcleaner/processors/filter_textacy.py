@@ -19,6 +19,13 @@ from textacy.preprocessing.resources import (
 from .base import BaseProcessor
 
 
+# prevent remove '...'
+PUNCTUATION_MAP = string.punctuation.replace('.', '')
+# FIXME: error in slash escaping inside of normalize_repeating_chars
+#        maybe already fixed in textacy?
+PUNCTUATION_MAP = PUNCTUATION_MAP.replace('\\', '')
+
+
 class FilterTextacyProcessor(BaseProcessor):
 
     __processor_name__ = Path(__file__).resolve().stem
@@ -28,12 +35,6 @@ class FilterTextacyProcessor(BaseProcessor):
         self.or_condition = or_condition
 
     def process_line(self, line: str) -> Optional[str]:
-        # prevent remove '...'
-        punctuation_map = string.punctuation.replace('.', '')
-        # FIXME: error in slash escaping inside of normalize_repeating_chars
-        #        maybe already fixed in textacy?
-        punctuation_map = punctuation_map.replace('\\', '')
-
         # TODO: maybe remove urls / emails, not skip?
         if RE_SHORT_URL.search(line):
             return None
@@ -49,7 +50,7 @@ class FilterTextacyProcessor(BaseProcessor):
         line = normalize_unicode(line, form='NFKC')
 
         # repeating symbols
-        for punct in punctuation_map:
+        for punct in PUNCTUATION_MAP:
             if punct in line:
                 line = normalize_repeating_chars(line, chars=punct, maxn=1)
         if '....' in line:

@@ -1,5 +1,9 @@
 # TODO: >=min_ver<max_ver
-fasttext==0.9.2
+
+# https://github.com/facebookresearch/fastText/issues/1067
+# fasttext==0.9.2
+-e git+git@github.com:facebookresearch/fastText.git@a20c0d27cd0ee88a25ea0433b7f03038cd728459#egg=fasttext
+
 textacy==0.10.1
 tqdm==4.49.0
 # FIXME: https://github.com/vzhou842/profanity-check/issues/24
@@ -7,6 +11,7 @@ tqdm==4.49.0
 # -e git+git@github.com:vzhou842/profanity-check.git@c835dc0f8ef28c7691688ecb774fd3149c1f097b#egg=profanity-check
 profanity-check==1.0.3
 scikit-learn<=0.20.2
+
 selectolax==0.2.7
 nltk==3.5
 requests==2.24.0

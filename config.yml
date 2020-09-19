@@ -9,6 +9,8 @@ PROCESSORS:
       delimiter: '~'
       delimited_position: -1
   - filter_textacy
+  - filter_profanity:
+      threshold: 0.9
 POST_PROCESSORS:
   - unique
   - shuffle

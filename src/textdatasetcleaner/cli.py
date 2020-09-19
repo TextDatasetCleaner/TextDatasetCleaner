@@ -25,6 +25,8 @@ def run(config_file: str, input_file: str, output_file: str, overwrite: bool):
     config = load_config(config_file)
     validate_config(config)
 
+    print(config)
+
     validate_processors(config)
 
     # create Loader

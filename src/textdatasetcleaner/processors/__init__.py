@@ -1,6 +1,7 @@
 from typing import Dict
 
 from .base import BaseProcessor
+from .clean_html import CleanHTMLProcessor
 from .detect_language import DetectLanguageProcessor
 from .line_strip import LineStripProcessor
 from .shuffle import ShuffleProcessor
@@ -8,6 +9,7 @@ from .unique import UniqueProcessor
 
 
 __all__ = (
+    CleanHTMLProcessor,
     DetectLanguageProcessor,
     LineStripProcessor,
     ShuffleProcessor,

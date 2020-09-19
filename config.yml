@@ -2,6 +2,8 @@ PRE_PROCESSORS:
   - unique
 PROCESSORS:
   - line_strip
+  - clean_html:
+      or_condition: False
   - detect_language:
       language_code: ru
       delimiter: '~'

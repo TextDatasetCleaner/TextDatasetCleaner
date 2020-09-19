@@ -14,8 +14,8 @@ class DetectLanguageProcessor(BaseProcessor):
     __processor_name__ = Path(__file__).resolve().stem
     __processor_type__ = 'line'
 
-    def __init__(self, language_code: str, threshold: float = 0.9, delimiter: Optional[str] = None,
-                 delimited_position: int = -1, model_url: Optional[str] = None):
+    def __init__(self, language_code: str, threshold: float = 0.9, model_url: Optional[str] = None,
+                 delimiter: Optional[str] = None, delimited_position: int = -1):
 
         self.language_code = language_code
         self.threshold = threshold
@@ -26,6 +26,7 @@ class DetectLanguageProcessor(BaseProcessor):
         self.model_path = 'cache-fasttext.bin'
 
         if model_url is None:
+            # https://fasttext.cc/docs/en/language-identification.html
             model_url = 'https://dl.fbaipublicfiles.com/fasttext/supervised-models/lid.176.bin'
 
         self.__download_model(model_url)

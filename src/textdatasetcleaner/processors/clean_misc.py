@@ -45,7 +45,7 @@ class CleanMiscProcessor(BaseProcessor):
             line = line.replace('\u3003', ' ')
 
         if ' .' in line:
-            line = RE_SPACE_DOT.sub('.', line)
+            line = RE_SPACE_DOT.sub('. ', line)
 
         # dash
         if '—' in line:     # em dash

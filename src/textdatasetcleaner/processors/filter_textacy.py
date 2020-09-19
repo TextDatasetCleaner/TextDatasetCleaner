@@ -21,7 +21,7 @@ from .base import BaseProcessor
 
 # prevent remove '...'
 PUNCTUATION_MAP = string.punctuation.replace('.', '')
-# FIXME: error in slash escaping inside of normalize_repeating_chars
+# FIXME: error in slash escaping inside of `normalize_repeating_chars` func
 #        maybe already fixed in textacy?
 PUNCTUATION_MAP = PUNCTUATION_MAP.replace('\\', '')
 

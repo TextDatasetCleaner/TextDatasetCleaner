@@ -6,6 +6,7 @@ from .clean_misc import CleanMiscProcessor
 from .detect_language import DetectLanguageProcessor
 from .filter_profanity import FilterProfanityProcessor
 from .filter_textacy import FilterTextacyProcessor
+from .line_convert_case import LineConvertCaseProcessor
 from .line_strip import LineStripProcessor
 from .shuffle import ShuffleProcessor
 from .unique import UniqueProcessor
@@ -17,6 +18,7 @@ __all__ = (
     DetectLanguageProcessor,
     FilterProfanityProcessor,
     FilterTextacyProcessor,
+    LineConvertCaseProcessor,
     LineStripProcessor,
     ShuffleProcessor,
     UniqueProcessor,

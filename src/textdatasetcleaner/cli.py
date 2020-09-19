@@ -24,19 +24,18 @@ def run(config_file: str, input_file: str, output_file: str, overwrite: bool):
 
     config = load_config(config_file)
     validate_config(config)
-
     validate_processors(config)
 
     # create Loader
     ldr = Loader(config, input_file, output_file)
 
-    # start pre processing
+    # start PRE-processing
     ldr.file_processing('PRE_PROCESSORS')
 
     # start processing
     ldr.line_processing()
 
-    # start post processing
+    # start POST-processing
     ldr.file_processing('POST_PROCESSORS')
 
     ldr.finish()

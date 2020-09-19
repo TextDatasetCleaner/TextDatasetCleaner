@@ -60,11 +60,11 @@ class Loader:
 
                 for processor in processors:
                     line = processor.process_line(line)
-                    if line is None:
+                    if not line:    # empty or is None
                         break
 
                 # save after all processors
-                if line is not None:
+                if line:    # not empty and is not None
                     fdw.write(line + '\n')
 
         # TODO: check need remove old input_file

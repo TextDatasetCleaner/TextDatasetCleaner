@@ -8,6 +8,7 @@ PROCESSORS:
       language_code: ru
       delimiter: '~'
       delimited_position: -1
+  - filter_textacy
 POST_PROCESSORS:
   - unique
   - shuffle

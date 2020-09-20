@@ -10,12 +10,12 @@ def check_output_file_not_exists(path: str):
 
 
 def validate_config(config: dict):
-    required_parameters = ['PRE_PROCESSORS', 'PROCESSORS', 'POST_PROCESSORS']
+    required_parameters = ['PRE_PROCESSING', 'PROCESSING', 'POST_PROCESSING']
     # required + optional
     parameter_types = {
-        'PRE_PROCESSORS': list,
-        'PROCESSORS': list,
-        'POST_PROCESSORS': list,
+        'PRE_PROCESSING': list,
+        'PROCESSING': list,
+        'POST_PROCESSING': list,
         'CACHE_DIR': str,
     }
 
@@ -36,9 +36,9 @@ def validate_config(config: dict):
 
 def validate_processors(config: dict):
     stage_types = {
-        'PRE_PROCESSORS': 'file',
-        'PROCESSORS': 'line',
-        'POST_PROCESSORS': 'file',
+        'PRE_PROCESSING': 'file',
+        'PROCESSING': 'line',
+        'POST_PROCESSING': 'file',
     }
 
     for stage_name, stage_type in stage_types.items():

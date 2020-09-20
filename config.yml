@@ -1,6 +1,6 @@
-PRE_PROCESSORS:
+PRE_PROCESSING:
   - unique
-PROCESSORS:
+PROCESSING:
   - line_strip
   - clean_html:
       or_condition: False
@@ -13,7 +13,8 @@ PROCESSORS:
   - filter_profanity:
       threshold: 0.9
   - clean_misc
-POST_PROCESSORS:
+POST_PROCESSING:
   - unique
   - shuffle
+
 CACHE_DIR: '/tmp/tdc'

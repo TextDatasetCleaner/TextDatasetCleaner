@@ -34,7 +34,7 @@ class Loader:
 
     def line_processing(self):
         processors = []
-        for processor_data in self.config['PROCESSORS']:
+        for processor_data in self.config['PROCESSING']:
             params = {}
             if isinstance(processor_data, dict):
                 # HACK: processor with parameters for __init__

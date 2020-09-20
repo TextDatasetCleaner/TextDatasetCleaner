@@ -30,13 +30,13 @@ def run(config_file: str, input_file: str, output_file: str, overwrite: bool):
     ldr = Loader(config, input_file, output_file)
 
     # start PRE-processing
-    ldr.file_processing('PRE_PROCESSORS')
+    ldr.file_processing('PRE_PROCESSING')
 
     # start processing
     ldr.line_processing()
 
     # start POST-processing
-    ldr.file_processing('POST_PROCESSORS')
+    ldr.file_processing('POST_PROCESSING')
 
     ldr.finish()
 

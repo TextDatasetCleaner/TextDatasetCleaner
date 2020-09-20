@@ -9,6 +9,9 @@ class BaseProcessor(ABC):
     __processor_name__ = None
     __processor_type__ = None
 
+    def __init__(self, *args, **kwargs):
+        pass
+
     def process_line(self, line: str) -> Optional[str]:
         """
             @:returns: None if need skip this line

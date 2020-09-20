@@ -11,10 +11,12 @@ def check_output_file_not_exists(path: str):
 
 def validate_config(config: dict):
     required_parameters = ['PRE_PROCESSORS', 'PROCESSORS', 'POST_PROCESSORS']
+    # required + optional
     parameter_types = {
         'PRE_PROCESSORS': list,
         'PROCESSORS': list,
         'POST_PROCESSORS': list,
+        'CACHE_DIR': str,
     }
 
     for param in required_parameters:
@@ -22,10 +24,14 @@ def validate_config(config: dict):
             # TODO: own exception
             raise ValueError(f'Missing required configuration parameter: {param}')
 
-    for param, type_ in parameter_types.items():
-        if not isinstance(config[param], type_):
+    for param_key, param_obj in config.items():
+        if param_key not in parameter_types:
+            # TODO: own exc
+            raise ValueError(f'Unknown config parameter: {param_key}')
+
+        if not isinstance(param_obj, parameter_types[param_key]):   # noqa # fixme
             # TODO: own exception
-            raise TypeError(f'Configuration parameter {param} must be a type of {type_}')
+            raise TypeError(f'Configuration parameter {param_key} must be a type of {parameter_types[param_key]}')
 
 
 def validate_processors(config: dict):

@@ -8,6 +8,7 @@ PROCESSORS:
       language_code: ru
       delimiter: '~'
       delimited_position: -1
+      model_path: '/tmp/fasttext-lid.176.bin'
   - filter_textacy
   - filter_profanity:
       threshold: 0.9
@@ -15,3 +16,4 @@ PROCESSORS:
 POST_PROCESSORS:
   - unique
   - shuffle
+CACHE_DIR: '/tmp/tdc'

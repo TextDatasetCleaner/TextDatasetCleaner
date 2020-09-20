@@ -1,7 +1,7 @@
 import os
-import tempfile
 
 from .processors import processors_dict
+from .helpers import get_temp_file_path
 
 
 class Loader:
@@ -18,7 +18,7 @@ class Loader:
         for processor_name in self.config[stage]:
             processor = processors_dict[processor_name]()
 
-            _, temp_file_path = tempfile.mkstemp()
+            temp_file_path = get_temp_file_path(self.config)
             try:
                 result = processor.process_file(self.input_file, temp_file_path)
             except OSError as e:
@@ -49,7 +49,7 @@ class Loader:
             processor = processors_dict[processor_name](**params)
             processors.append(processor)
 
-        _, temp_file_path = tempfile.mkstemp()
+        temp_file_path = get_temp_file_path(self.config)
 
         # TODO: codecs?
         with open(self.input_file, encoding='utf-8') as fdr, open(temp_file_path, 'w', encoding='utf-8') as fdw:

@@ -11,7 +11,5 @@ class LineStripProcessor(BaseProcessor):
 
     def process_line(self, line: str) -> Optional[str]:
         line = line.strip()
-        if not line:
-            return None
 
         return line

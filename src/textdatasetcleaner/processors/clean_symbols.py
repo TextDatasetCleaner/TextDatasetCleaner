@@ -13,7 +13,7 @@ RE_LINEBREAK = re.compile(r'(\r\n|[\n\v])+')
 RE_NONBREAKING_SPACE = re.compile(r'[^\S\n\v]+', flags=re.UNICODE)
 
 
-class CleanMiscProcessor(BaseProcessor):
+class CleanSymbolsProcessor(BaseProcessor):
 
     __processor_name__ = Path(__file__).resolve().stem
     __processor_type__ = 'line'

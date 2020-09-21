@@ -12,7 +12,7 @@ PROCESSING:
   - filter_textacy
   - filter_profanity:
       threshold: 0.9
-  - clean_misc
+  - clean_symbols
 POST_PROCESSING:
   - unique
   - shuffle

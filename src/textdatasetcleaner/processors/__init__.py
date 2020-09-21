@@ -2,7 +2,7 @@ from typing import Dict
 
 from .base import BaseProcessor
 from .clean_html import CleanHTMLProcessor
-from .clean_misc import CleanMiscProcessor
+from .clean_symbols import CleanSymbolsProcessor
 from .detect_language import DetectLanguageProcessor
 from .filter_profanity import FilterProfanityProcessor
 from .filter_textacy import FilterTextacyProcessor
@@ -14,7 +14,7 @@ from .unique import UniqueProcessor
 
 __all__ = (
     CleanHTMLProcessor,
-    CleanMiscProcessor,
+    CleanSymbolsProcessor,
     DetectLanguageProcessor,
     FilterProfanityProcessor,
     FilterTextacyProcessor,

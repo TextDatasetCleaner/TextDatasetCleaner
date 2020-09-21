@@ -9,10 +9,18 @@ PROCESSING:
       delimiter: '~'
       delimited_position: -1
       model_path: '/tmp/fasttext-lid.176.bin'
-  - filter_textacy
+  - remove_accents
+  - normalize_hyphenated_words
+  - normalize_quotation_marks
+  - normalize_repeating_chars
+  - normalize_unicode
+  - filter_url
+  - filter_email
   - filter_profanity:
       threshold: 0.9
   - clean_symbols
+  # need be last:
+  - normalize_whitespace
 POST_PROCESSING:
   - unique
   - shuffle

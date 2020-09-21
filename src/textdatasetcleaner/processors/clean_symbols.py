@@ -18,9 +18,6 @@ class CleanSymbolsProcessor(BaseProcessor):
     __processor_name__ = Path(__file__).resolve().stem
     __processor_type__ = 'line'
 
-    def __init__(self, or_condition: bool = False):
-        self.or_condition = or_condition
-
     def process_line(self, line: str) -> Optional[str]:
         # quotation mark
         # https://www.htmlsymbols.xyz/punctuation-symbols/quotation-mark

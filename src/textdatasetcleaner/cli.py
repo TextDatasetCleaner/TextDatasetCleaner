@@ -9,6 +9,7 @@ from .validators import check_output_file_not_exists, validate_config, validate_
 
 # TODO: verbosity == logging.DEBUG
 @click.command()
+# TODO: default config
 @click.option('-c', '--config_file', type=click.Path(exists=True, resolve_path=True, readable=True, file_okay=True),
               required=True, help='Path to config file')
 @click.option('-i', '--input_file', type=click.Path(exists=True, resolve_path=True, readable=True,  file_okay=True),

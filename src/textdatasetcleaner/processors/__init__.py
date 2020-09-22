@@ -4,6 +4,7 @@ from .base import BaseProcessor
 from .clean_html import CleanHTMLProcessor
 from .clean_symbols import CleanSymbolsProcessor
 from .detect_language import DetectLanguageProcessor
+from .filter_currency_symbols import FilterCurrencySymbolsProcessor
 from .filter_email import FilterEmailProcessor
 from .filter_profanity import FilterProfanityProcessor
 from .filter_url import FilterURLProcessor
@@ -23,6 +24,7 @@ __all__ = (
     CleanHTMLProcessor,
     CleanSymbolsProcessor,
     DetectLanguageProcessor,
+    FilterCurrencySymbolsProcessor,
     FilterEmailProcessor,
     FilterProfanityProcessor,
     FilterURLProcessor,

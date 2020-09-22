@@ -15,6 +15,7 @@ PROCESSING:
   - normalize_repeating_chars
   - normalize_unicode
   - filter_url
+  - filter_currency_symbols
   - filter_email
   - filter_profanity:
       threshold: 0.9

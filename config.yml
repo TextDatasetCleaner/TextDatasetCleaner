@@ -20,6 +20,7 @@ PROCESSING:
   - filter_emoji
   - filter_hashtags
   - filter_numbers
+  - filter_phone_number
   - filter_profanity:
       threshold: 0.9
   - clean_symbols

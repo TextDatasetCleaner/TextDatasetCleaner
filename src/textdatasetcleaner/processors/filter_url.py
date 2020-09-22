@@ -11,14 +11,14 @@ class FilterURLProcessor(BaseProcessor):
     __processor_name__ = Path(__file__).resolve().stem
     __processor_type__ = 'line'
 
-    def __init__(self, mode: str = 'remove_line', replace_to: str = ' '):
+    def __init__(self, mode: str = 'remove_line', replace_with: str = ' '):
         allowed = ['remove_line', 'replace']
         if mode not in allowed:
             # TODO: own exc
             raise ValueError(f'Wrong mode for {self.name} processor: {mode}, allowed only: {allowed}')
 
         self.mode = mode
-        self.replace_to = replace_to
+        self.replace_with = replace_with
 
     def process_line(self, line: str) -> Optional[str]:
         if self.mode == 'remove_line':
@@ -28,7 +28,7 @@ class FilterURLProcessor(BaseProcessor):
                 return None
         elif self.mode == 'replace':
             # TODO: bench 'sub' vs 'search + sub'
-            line = RE_SHORT_URL.sub(self.replace_to, line)
-            line = RE_URL.sub(self.replace_to, line)
+            line = RE_SHORT_URL.sub(self.replace_with, line)
+            line = RE_URL.sub(self.replace_with, line)
 
         return line

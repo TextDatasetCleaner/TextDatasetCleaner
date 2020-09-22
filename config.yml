@@ -21,6 +21,7 @@ PROCESSING:
   - filter_hashtags
   - filter_numbers
   - filter_phone_number
+  - filter_user_handle
   - remove_profanity:
       threshold: 0.9
   - clean_symbols

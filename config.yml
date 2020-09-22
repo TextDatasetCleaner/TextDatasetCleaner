@@ -17,6 +17,7 @@ PROCESSING:
   - filter_url
   - filter_currency_symbols
   - filter_email
+  - filter_emoji
   - filter_profanity:
       threshold: 0.9
   - clean_symbols

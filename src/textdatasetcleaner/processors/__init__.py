@@ -6,6 +6,7 @@ from .clean_symbols import CleanSymbolsProcessor
 from .detect_language import DetectLanguageProcessor
 from .filter_currency_symbols import FilterCurrencySymbolsProcessor
 from .filter_email import FilterEmailProcessor
+from .filter_emoji import FilterEmojiProcessor
 from .filter_profanity import FilterProfanityProcessor
 from .filter_url import FilterURLProcessor
 from .line_convert_case import LineConvertCaseProcessor
@@ -26,6 +27,7 @@ __all__ = (
     DetectLanguageProcessor,
     FilterCurrencySymbolsProcessor,
     FilterEmailProcessor,
+    FilterEmojiProcessor,
     FilterProfanityProcessor,
     FilterURLProcessor,
     LineConvertCaseProcessor,

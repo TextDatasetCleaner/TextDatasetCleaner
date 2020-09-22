@@ -6,7 +6,7 @@ from profanity_check import predict_prob
 from .base import BaseProcessor
 
 
-class FilterProfanityProcessor(BaseProcessor):
+class RemoveProfanityProcessor(BaseProcessor):
 
     __processor_name__ = Path(__file__).resolve().stem
     __processor_type__ = 'line'

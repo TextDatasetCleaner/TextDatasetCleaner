@@ -19,6 +19,7 @@ PROCESSING:
   - filter_email
   - filter_emoji
   - filter_hashtags
+  - filter_numbers
   - filter_profanity:
       threshold: 0.9
   - clean_symbols

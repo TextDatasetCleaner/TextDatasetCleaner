@@ -8,6 +8,7 @@ from .filter_currency_symbols import FilterCurrencySymbolsProcessor
 from .filter_email import FilterEmailProcessor
 from .filter_emoji import FilterEmojiProcessor
 from .filter_hashtags import FilterHashtagsProcessor
+from .filter_numbers import FilterNumbersProcessor
 from .filter_profanity import FilterProfanityProcessor
 from .filter_url import FilterURLProcessor
 from .line_convert_case import LineConvertCaseProcessor
@@ -30,6 +31,7 @@ __all__ = (
     FilterEmailProcessor,
     FilterEmojiProcessor,
     FilterHashtagsProcessor,
+    FilterNumbersProcessor,
     FilterProfanityProcessor,
     FilterURLProcessor,
     LineConvertCaseProcessor,

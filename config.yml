@@ -10,6 +10,9 @@ PROCESSING:
       delimited_position: -1
       model_path: '/tmp/fasttext-lid.176.bin'
   - remove_accents
+  - filter_stop_words:
+      language_code: ru
+      mode: replace
   - normalize_hyphenated_words
   - normalize_quotation_marks
   - normalize_repeating_chars

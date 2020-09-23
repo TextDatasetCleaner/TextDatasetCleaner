@@ -10,6 +10,7 @@ from .filter_emoji import FilterEmojiProcessor
 from .filter_hashtags import FilterHashtagsProcessor
 from .filter_numbers import FilterNumbersProcessor
 from .filter_phone_number import FilterPhoneNumberProcessor
+from .filter_stop_words import FilterStopWordsProcessor
 from .filter_url import FilterURLProcessor
 from .filter_user_handle import FilterUserHandleProcessor
 from .line_convert_case import LineConvertCaseProcessor
@@ -35,6 +36,7 @@ __all__ = (
     FilterHashtagsProcessor,
     FilterNumbersProcessor,
     FilterPhoneNumberProcessor,
+    FilterStopWordsProcessor,
     FilterURLProcessor,
     FilterUserHandleProcessor,
     LineConvertCaseProcessor,

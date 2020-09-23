@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Optional
 
 from .base import BaseProcessor
-from ..helpers import get_temp_file_path, download_file
+from ..helpers import download_file, get_temp_file_path
 
 
 class FilterStopWordsProcessor(BaseProcessor):
@@ -18,7 +18,8 @@ class FilterStopWordsProcessor(BaseProcessor):
             # Run in Dev Browser Console:
             # var l = '';
             # $x("//a[starts-with(@href, '/6/stopwords-json/blob/master/dist/')]/@href").forEach(function(el) {
-            #   languages = languages + "'" + el.textContent.replace('/6/stopwords-json/blob/master/dist/', '').replace('.json', '') + "',\n";
+            #   var code = el.textContent.replace('/6/stopwords-json/blob/master/dist/', '').replace('.json', '');
+            #   languages = languages + "'" + code + "',\n";
             # });
             # console.log(languages);
             'af',

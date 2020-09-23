@@ -8,10 +8,6 @@ from .base import BaseProcessor
 RE_SPACE_DOT = re.compile(r'\s+\.\s*')
 RE_MANY_DASH = re.compile(r'[\s\-]{2,}')
 
-# from textacy
-RE_LINEBREAK = re.compile(r'(\r\n|[\n\v])+')
-RE_NONBREAKING_SPACE = re.compile(r'[^\S\n\v]+', flags=re.UNICODE)
-
 
 class CleanSymbolsProcessor(BaseProcessor):
 
@@ -19,113 +15,132 @@ class CleanSymbolsProcessor(BaseProcessor):
     __processor_type__ = 'line'
 
     def process_line(self, line: str) -> Optional[str]:
-        # quotation mark
-        # https://www.htmlsymbols.xyz/punctuation-symbols/quotation-mark
-        # '\u0022' == '"'
-        if '«' in line:
-            line = line.replace('«', '"')
-        if '»' in line:
-            line = line.replace('»', '"')
-        if '„' in line:
-            line = line.replace('„', '"')
-        if '\u02BA' in line:    # ʺ
-            line = line.replace('\u02BA', ' ')
-        if '\u030B' in line:    #  ̋
-            line = line.replace('\u030B', ' ')
-        if '\u030E' in line:    #  ̎
-            line = line.replace('\u030E', ' ')
-        if '\u05F4' in line:    # ״
-            line = line.replace('\u05F4', ' ')
-        if '\u2033' in line:    # ″
-            line = line.replace('\u2033', ' ')
-        if '\u3003' in line:    # 〃
-            line = line.replace('\u3003', ' ')
+        double_quotes = [
+            '«',
+            '»',
+            '„',
+            # https://www.htmlsymbols.xyz/punctuation-symbols/quotation-mark
+            # '\u0022' == '"'
+            '\u02BA',   # ʺ
+            '\u030B',   #  ̋
+            '\u030E',   #  ̎
+            '\u05F4',   # ״
+            '\u2033',   # ″
+            '\u3003',   # 〃
+            # https://github.com/jfilter/clean-text/blob/master/cleantext/constants.py#L97-L114
+            '‹',
+            '›',
+            "“",
+            "‟",
+            "”",
+            "❝",
+            "❞",
+            "❮",
+            "❯",
+            "〝",
+            "〞",
+            "〟",
+            "＂",
+        ]
+        for symbol in double_quotes:
+            line = line.replace(symbol, '"')
 
-        if ' .' in line:
-            line = RE_SPACE_DOT.sub('. ', line)
+        single_quotes = [
+            # https://github.com/jfilter/clean-text/blob/master/cleantext/constants.py#L115
+            "‘",
+            "‛",
+            "’",
+            "❛",
+            "❜",
+            "`",
+            "´",
+        ]
+        for symbol in single_quotes:
+            line = line.replace(symbol, "'")
 
-        # dash
-        if '—' in line:     # em dash
-            line = line.replace('—', '-')
-        if '–' in line:     # en dash
-            line = line.replace('–', '-')
-        if '―' in line:     # horizontal bar
-            line = line.replace('―', '-')
-        if '-' in line:     # dash
+        dashes = [
+            '—',    # em dash
+            '–',    # en dash
+            '―',    # horizontal bar
+        ]
+        for symbol in dashes:
+            line = line.replace(symbol, '-')
+
+        # duplicate dashes
+        if '-' in line:
             matches = RE_MANY_DASH.findall(line)
             for match in matches:
                 match = match.strip()
                 if match and len(match) > 1:
                     line = line.replace(match, '-')
 
-        # spaces
-        # https://www.htmlsymbols.xyz/punctuation-symbols/space-symbols
-        # Run in Dev Browser Console:
-        # $x('//a[contains(@class, "content-item")]/div[@class="two-in-one"][3]/span').forEach(function(el) {
-        #   var symb = el.textContent.replace('\\', '');
-        #   console.log("if '\\u" + symb + "' in line:\n    line = line.replace('\\u" + symb + "', ' ')");
-        # });
-        if '\u00A0' in line:
-            line = line.replace('\u00A0', ' ')
-        if '\u0180' in line:
-            line = line.replace('\u0180', ' ')
-        if '\u2000' in line:
-            line = line.replace('\u2000', ' ')
-        if '\u2001' in line:
-            line = line.replace('\u2001', ' ')
-        if '\u2002' in line:
-            line = line.replace('\u2002', ' ')
-        if '\u2003' in line:
-            line = line.replace('\u2003', ' ')
-        if '\u2004' in line:
-            line = line.replace('\u2004', ' ')
-        if '\u2005' in line:
-            line = line.replace('\u2005', ' ')
-        if '\u2007' in line:
-            line = line.replace('\u2007', ' ')
-        if '\u2008' in line:
-            line = line.replace('\u2008', ' ')
-        if '\u2009' in line:
-            line = line.replace('\u2009', ' ')
-        if '\u200A' in line:
-            line = line.replace('\u200A', ' ')
-        if '\u200B' in line:
-            line = line.replace('\u200B', ' ')
-        if '\u2060' in line:
-            line = line.replace('\u2060', ' ')
-        if '\u2334' in line:
-            line = line.replace('\u2334', ' ')
-        if '\u2422' in line:
-            line = line.replace('\u2422', ' ')
-        if '\u2423' in line:
-            line = line.replace('\u2423', ' ')
-        if '\u2E00' in line:
-            line = line.replace('\u2E00', ' ')
-        if '\u3000' in line:
-            line = line.replace('\u3000', ' ')
-        if '\uFEFF' in line:
-            line = line.replace('\uFEFF', ' ')
+        spaces = [
+            # https://www.htmlsymbols.xyz/punctuation-symbols/space-symbols
+            # Run in Dev Browser Console:
+            # var symbols = '';
+            # $x('//a[contains(@class, "content-item")]/div[@class="two-in-one"][3]/span').forEach(function(el) {
+            #   symbols = symbols + "    '\\u" + el.textContent.replace('\\', '') + "',\n";
+            # });
+            # console.log(symbols);
+            '\u00A0',
+            '\u0180',
+            '\u2000',
+            '\u2001',
+            '\u2002',
+            '\u2003',
+            '\u2004',
+            '\u2005',
+            '\u2007',
+            '\u2008',
+            '\u2009',
+            '\u200A',
+            '\u200B',
+            '\u2060',
+            '\u2334',
+            '\u2422',
+            '\u2423',
+            '\u2E00',
+            '\u3000',
+            '\uFEFF',
 
-        # spaces 2
-        if '\u0084' in line:
-            line = line.replace('\u0084', ' ')
-        if '\u0091' in line:
-            line = line.replace('\u0091', ' ')
-        if '\u0096' in line:
-            line = line.replace('\u0096', ' ')
-        if '\u0097' in line:
-            line = line.replace('\u0097', ' ')
+            # spaces 2
+            '\u0084',
+            '\u0091',
+            '\u0096',
+            '\u0097',
 
-        # spaces 3
-        if '\u202C' in line:
-            line = line.replace('\u202C', ' ')
-        if '\u200E' in line:
-            line = line.replace('\u200E', ' ')
-        if '\u202A' in line:
-            line = line.replace('\u202A', ' ')
-        if '\x99' in line:
-            line = line.replace('\x99', ' ')
+            # spaces 3
+            '\u202C',
+            '\u200E',
+            '\u202A',
+            '\x99',
+        ]
+        for symbol in spaces:
+            line = line.replace(symbol, ' ')
 
-        line = RE_NONBREAKING_SPACE.sub(' ', RE_LINEBREAK.sub(r'\n', line)).strip()
+        exclamations = [
+            # https://www.htmlsymbols.xyz/punctuation-symbols/exclamation-mark
+            # '\u0021 == '!'
+            '\u00A1',   # ¡
+            '\u01C3',   # ǃ
+            '\u203C',   # ‼
+            '\u2762',   # ❢
+        ]
+        for symbol in exclamations:
+            line = line.replace(symbol, ' ')
+
+        questions = [
+            # https://www.htmlsymbols.xyz/search?q=question
+            '\u203D',   # ‽
+            '\u00BF',   # ¿
+            '\uFF1F',   # ？
+        ]
+        for symbol in questions:
+            line = line.replace(symbol, ' ')
+
+        # fix 'abc    .     cba'
+        if ' .' in line:
+            line = RE_SPACE_DOT.sub('. ', line)
+            line = line.strip()
 
         return line

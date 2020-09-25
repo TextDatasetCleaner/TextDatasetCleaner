@@ -19,5 +19,6 @@ class UniqueProcessor(BaseProcessor):
             p2 = subprocess.Popen(['uniq'], stdin=p1.stdout, stdout=fdw)
             p1.stdout.close()
             p2.communicate()
+            p1.wait()
 
-        return p2.returncode == 0
+        return p1.returncode == 0 and p2.returncode == 0

@@ -30,6 +30,8 @@ class Loader:
             if not result:
                 raise TDSRuntimeError(f'After "{stage}" stage by "{processor_name}" processor result file is empty')
 
+            # TODO: log lines count
+
             self._remove_previous_temp(temp_file_path)
             self.input_file = temp_file_path
 
@@ -61,6 +63,7 @@ class Loader:
 
                 for processor in processors:
                     line = processor.process_line(line)
+                    # TODO: log processed line
                     if not line:    # empty or is None
                         break
 

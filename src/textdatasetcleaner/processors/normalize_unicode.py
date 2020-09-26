@@ -4,6 +4,7 @@ from typing import Optional
 from textacy.preprocessing import normalize_unicode
 
 from .base import BaseProcessor
+from ..exceptions import TDSValueError
 
 
 class NormalizeUnicodeProcessor(BaseProcessor):
@@ -14,8 +15,7 @@ class NormalizeUnicodeProcessor(BaseProcessor):
     def __init__(self, form: str = 'NFKC'):
         allowed = ['NFC', 'NFD', 'NFKC', 'NFKD']
         if form not in allowed:
-            # TODO: own exc
-            raise ValueError(f'Wrong form for {self.name} processor: {form}, allowed only: {allowed}')
+            raise TDSValueError(f'Wrong form for {self.name} processor: {form}, allowed only: {allowed}')
 
         self.form = form
 

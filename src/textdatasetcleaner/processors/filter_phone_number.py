@@ -4,6 +4,7 @@ from typing import Optional
 from textacy.preprocessing.resources import RE_PHONE_NUMBER
 
 from .base import BaseProcessor
+from ..exceptions import TDSValueError
 
 
 class FilterPhoneNumberProcessor(BaseProcessor):
@@ -14,8 +15,7 @@ class FilterPhoneNumberProcessor(BaseProcessor):
     def __init__(self, mode: str = 'remove_line', replace_with: str = ' '):
         allowed = ['remove_line', 'replace']
         if mode not in allowed:
-            # TODO: own exc
-            raise ValueError(f'Wrong mode for {self.name} processor: {mode}, allowed only: {allowed}')
+            raise TDSValueError(f'Wrong mode for {self.name} processor: {mode}, allowed only: {allowed}')
 
         self.mode = mode
         self.replace_with = replace_with

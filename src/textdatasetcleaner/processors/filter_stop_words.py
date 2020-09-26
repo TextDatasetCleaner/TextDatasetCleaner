@@ -5,6 +5,7 @@ from typing import Optional
 
 from .base import BaseProcessor
 from ..helpers import download_file, get_temp_file_path
+from ..exceptions import TDSValueError
 
 
 class FilterStopWordsProcessor(BaseProcessor):
@@ -74,8 +75,7 @@ class FilterStopWordsProcessor(BaseProcessor):
             'zu',
         ]
         if language_code not in allowed_language:
-            # TODO: own exc
-            raise ValueError(f'Wrong language for {self.name} processor: {language_code}, allowed only: {allowed_language}')
+            raise TDSValueError(f'Wrong language for {self.name} processor: {language_code}, allowed only: {allowed_language}')
         self.language_code = language_code
 
         url = f'https://raw.githubusercontent.com/6/stopwords-json/master/dist/{self.language_code}.json'
@@ -93,8 +93,7 @@ class FilterStopWordsProcessor(BaseProcessor):
 
         allowed = ['remove_line', 'replace']
         if mode not in allowed:
-            # TODO: own exc
-            raise ValueError(f'Wrong mode for {self.name} processor: {mode}, allowed only: {allowed}')
+            raise TDSValueError(f'Wrong mode for {self.name} processor: {mode}, allowed only: {allowed}')
 
         self.mode = mode
         self.replace_with = replace_with

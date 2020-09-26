@@ -5,6 +5,8 @@ from typing import Optional
 import requests
 import yaml
 
+from .exceptions import TDSValueError
+
 
 def load_config(path: str):
     return yaml.safe_load(open(path))
@@ -23,8 +25,7 @@ def download_file(url: str, save_path: str):
     response = requests.get(url, stream=True)
 
     if response.status_code != 200:
-        # TODO: own exceptions
-        raise ValueError(f'Download {url} failed with code {response.status_code}')
+        raise TDSValueError(f'Download {url} failed with code {response.status_code}')
 
     # TODO: log download started / finished
     with open(save_path, 'wb') as fh:

@@ -2,6 +2,7 @@ from typing import Optional
 from pathlib import Path
 
 from .base import BaseProcessor
+from ..exceptions import TDSValueError
 
 
 class LineConvertCaseProcessor(BaseProcessor):
@@ -12,8 +13,7 @@ class LineConvertCaseProcessor(BaseProcessor):
     def __init__(self, mode: str):
         allowed = ['title', 'lower', 'upper']
         if mode not in allowed:
-            # TODO: own exc
-            raise ValueError(f'Wrong mode for {self.name} processor: {mode}, allowed only: {allowed}')
+            raise TDSValueError(f'Wrong mode for {self.name} processor: {mode}, allowed only: {allowed}')
         self.mode = mode
 
     def process_line(self, line: str) -> Optional[str]:

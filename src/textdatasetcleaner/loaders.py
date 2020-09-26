@@ -1,7 +1,8 @@
 import os
 
-from .processors import processors_dict
+from .exceptions import TDSRuntimeError, TDSValueError
 from .helpers import get_temp_file_path
+from .processors import processors_dict
 
 
 class Loader:
@@ -27,7 +28,7 @@ class Loader:
                 raise e
 
             if not result:
-                raise RuntimeError(f'After "{stage}" stage by "{processor_name}" processor result file is empty')
+                raise TDSRuntimeError(f'After "{stage}" stage by "{processor_name}" processor result file is empty')
 
             self._remove_previous_temp(temp_file_path)
             self.input_file = temp_file_path
@@ -44,7 +45,7 @@ class Loader:
                 processor_name = processor_data
             else:
                 # TODO: own exceptions
-                raise ValueError(f'Wrong processor: {processor_data}')
+                raise TDSValueError(f'Wrong processor: {processor_data}')
 
             processor = processors_dict[processor_name](**params)
             processors.append(processor)

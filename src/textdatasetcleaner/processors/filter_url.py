@@ -4,6 +4,7 @@ from typing import Optional
 from textacy.preprocessing.resources import RE_SHORT_URL, RE_URL
 
 from .base import BaseProcessor
+from ..exceptions import TDSValueError
 
 
 class FilterURLProcessor(BaseProcessor):
@@ -14,8 +15,7 @@ class FilterURLProcessor(BaseProcessor):
     def __init__(self, mode: str = 'remove_line', replace_with: str = ' '):
         allowed = ['remove_line', 'replace']
         if mode not in allowed:
-            # TODO: own exc
-            raise ValueError(f'Wrong mode for {self.name} processor: {mode}, allowed only: {allowed}')
+            raise TDSValueError(f'Wrong mode for {self.name} processor: {mode}, allowed only: {allowed}')
 
         self.mode = mode
         self.replace_with = replace_with

@@ -1,12 +1,13 @@
 import os
 import shutil
 
-from .processors import processors_types, processors_dict
+from .exceptions import TDSFileExistsError, TDSTypeError, TDSValueError
+from .processors import processors_dict, processors_types
 
 
 def check_output_file_not_exists(path: str):
     if os.path.exists(path):
-        raise FileExistsError(f'Output file already exists: {path}')
+        raise TDSFileExistsError(f'Output file already exists: {path}')
 
 
 def validate_config(config: dict):
@@ -21,17 +22,14 @@ def validate_config(config: dict):
 
     for param in required_parameters:
         if param not in config:
-            # TODO: own exception
-            raise ValueError(f'Missing required configuration parameter: {param}')
+            raise TDSValueError(f'Missing required configuration parameter: {param}')
 
     for param_key, param_obj in config.items():
         if param_key not in parameter_types:
-            # TODO: own exc
-            raise ValueError(f'Unknown config parameter: {param_key}')
+            raise TDSValueError(f'Unknown config parameter: {param_key}')
 
         if not isinstance(param_obj, parameter_types[param_key]):   # noqa # fixme
-            # TODO: own exception
-            raise TypeError(f'Configuration parameter {param_key} must be a type of {parameter_types[param_key]}')
+            raise TDSTypeError(f'Configuration parameter {param_key} must be a type of {parameter_types[param_key]}')
 
 
 def validate_processors(config: dict):
@@ -51,11 +49,11 @@ def validate_processors(config: dict):
                 params = processor[processor_name]
 
             if processor_name not in processors_types.keys():
-                raise ValueError(f'Processor {processor_name} for stage {stage_name} not found!')
+                raise TDSValueError(f'Processor {processor_name} for stage {stage_name} not found!')
 
             if processors_types[processor_name] != stage_type:
-                raise ValueError(f'Processor {processor_name} for stage {stage_name} '
-                                 f'must be a {stage_type}-typed processor')
+                raise TDSValueError(f'Processor {processor_name} for stage {stage_name} '
+                                    f'must be a {stage_type}-typed processor')
 
             # try create processor for check errors in initialization
             try:
@@ -65,8 +63,7 @@ def validate_processors(config: dict):
                 # FIXME: hack for tell processor name
                 message = message.replace('__init__()', f'{processor_name} processor')
                 message = f'{message} for __init__ method'
-                # TODO: own exc
-                raise TypeError(message)
+                raise TDSTypeError(message)
 
 
 def validate_free_space(input_file: str, output_file: str):
@@ -79,5 +76,4 @@ def validate_free_space(input_file: str, output_file: str):
     if file_size > free_space:
         free_space = free_space // 1024 ** 2
         file_size = file_size // 1024 ** 2
-        # TODO: own exception
-        raise OSError(f'Not enough disk space! Need: {file_size} MB, free: {free_space} MB')
+        raise TDSOSError(f'Not enough disk space! Need: {file_size} MB, free: {free_space} MB')

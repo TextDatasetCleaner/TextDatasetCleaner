@@ -31,7 +31,6 @@ PROCESSING:
   # need be last:
   - normalize_whitespace
 POST_PROCESSING:
-  - unique
   - shuffle
 
 CACHE_DIR: '/tmp/tdc'

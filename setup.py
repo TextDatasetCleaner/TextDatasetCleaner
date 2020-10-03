@@ -3,7 +3,7 @@ from setuptools import find_packages, setup
 
 setup(
     name='textdatasetcleaner',
-    version='1.0.0',
+    version='0.0.1',
     author='Denis Veselov',
     description='Pipeline for cleaning (preprocessing/normalizing) text datasets',
     url='https://github.com/TextDatasetCleaner/TextDatasetCleaner',

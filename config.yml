@@ -1,0 +1,36 @@
+PRE_PROCESSING:
+  - unique
+PROCESSING:
+  - line_strip
+  - clean_html:
+      or_condition: False
+  - detect_language:
+      language_code: ru
+      delimiter: '~'
+      delimited_position: -1
+      model_path: '/tmp/fasttext-lid.176.bin'
+  - remove_accents
+  - filter_stop_words:
+      language_code: ru
+      mode: replace
+  - normalize_hyphenated_words
+  - normalize_quotation_marks
+  - normalize_repeating_chars
+  - normalize_unicode
+  - filter_url
+  - filter_currency_symbols
+  - filter_email
+  - filter_emoji
+  - filter_hashtags
+  - filter_numbers
+  - filter_phone_number
+  - filter_user_handle
+  - remove_profanity:
+      threshold: 0.9
+  - clean_symbols
+  # need be last:
+  - normalize_whitespace
+POST_PROCESSING:
+  - shuffle
+
+CACHE_DIR: '/tmp/tdc'

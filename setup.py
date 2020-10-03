@@ -3,7 +3,7 @@ from setuptools import find_packages, setup
 
 setup(
     name='textdatasetcleaner',
-    version='0.0.1',
+    version='0.0.2',
     author='Denis Veselov',
     description='Pipeline for cleaning (preprocessing/normalizing) text datasets',
     url='https://github.com/TextDatasetCleaner/TextDatasetCleaner',
@@ -67,8 +67,12 @@ setup(
         'PyYAML>=5.3.1,<6.0.0',
         'textacy>=0.10.1<1.0.0',
         # FIXME: https://github.com/facebookresearch/fastText/issues/1067
-        ('fasttext @ https://github.com/facebookresearch/fastText/archive/'
-         'a20c0d27cd0ee88a25ea0433b7f03038cd728459.zip#egg=fasttext-0.9.2'),
+        # ('fasttext @ https://github.com/facebookresearch/fastText/archive/'
+        # 'a20c0d27cd0ee88a25ea0433b7f03038cd728459.zip#egg=fasttext-0.9.2'),
+
+        # Run `python setup.py sdist bdist_wheel`:
+        # Invalid value for requires_dist. Error: Can't have direct dependency 'fasttext @ ...'
+        'fasttext==0.9.2'
     ],
     include_package_data=True,
     python_requires='>=3.6',

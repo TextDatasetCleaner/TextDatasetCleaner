@@ -50,7 +50,6 @@ setup(
         'text processing',
         'text mining',
     ],
-
     entry_points={
         'console_scripts': [
             'tdc = textdatasetcleaner.cli:run',
@@ -74,7 +73,7 @@ setup(
         # FIXME: https://github.com/facebookresearch/fastText/issues/1067
         # ('fasttext @ https://github.com/facebookresearch/fastText/archive/'
         # 'a20c0d27cd0ee88a25ea0433b7f03038cd728459.zip#egg=fasttext-0.9.2'),
-
+        #
         # Run `python setup.py sdist bdist_wheel`:
         # Invalid value for requires_dist. Error: Can't have direct dependency 'fasttext @ ...'
         'fasttext==0.9.2',

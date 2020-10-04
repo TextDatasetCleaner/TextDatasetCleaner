@@ -67,7 +67,7 @@ def validate_processors(config: dict) -> None:
 
 
 def validate_free_space(input_file: str, output_file: str) -> None:
-    file_size = 2.2    # peak: (temp_file + output_file) * 1,1
+    file_size = 2.2  # peak: (temp_file + output_file) * 1,1
     file_size *= os.path.getsize(input_file)  # worst case: temp_file = output_file = input_file
 
     output_dir = os.path.dirname(output_file)

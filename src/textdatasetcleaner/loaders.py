@@ -6,7 +6,6 @@ from textdatasetcleaner.processors import processors_dict
 
 
 class Loader:
-
     def __init__(self, config: dict, input_file: str, output_file: str):
         self.config = config
         self.input_file = input_file
@@ -64,11 +63,11 @@ class Loader:
                 for proc in processors:
                     line = proc.process_line(line)  # type: ignore
                     # TODO: log processed line
-                    if not line:    # empty or is None
+                    if not line:  # empty or is None
                         break
 
                 # save after all processors
-                if line:    # not empty and is not None
+                if line:  # not empty and is not None
                     fdw.write(f'{line}\n')
 
         # TODO: check need remove old input_file

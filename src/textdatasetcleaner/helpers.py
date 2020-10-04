@@ -60,7 +60,6 @@ def get_temp_file_path(config: Optional[Dict[str, Any]] = None) -> str:
 
 # TODO: disable setter or find better method
 class ClassProperty(object):
-
     def __init__(self, func: Any) -> None:
         self.func = func
 

@@ -1,9 +1,9 @@
-from typing import Optional
 from pathlib import Path
+from typing import Optional
 
-from profanity_check import predict_prob
+from profanity_check import predict_prob  # type: ignore
 
-from .base import BaseProcessor
+from textdatasetcleaner.processors.base import BaseProcessor
 
 
 class RemoveProfanityProcessor(BaseProcessor):

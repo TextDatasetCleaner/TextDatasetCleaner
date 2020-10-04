@@ -2,9 +2,9 @@ import string
 from pathlib import Path
 from typing import Optional
 
-from textacy.preprocessing import normalize_repeating_chars
+from textacy.preprocessing import normalize_repeating_chars  # type: ignore
 
-from .base import BaseProcessor
+from textdatasetcleaner.processors.base import BaseProcessor
 
 
 # prevent remove '...'

@@ -1,6 +1,11 @@
 from setuptools import find_packages, setup
 
 
+def file_read(path: str) -> str:
+    with open(path, encoding='utf-8') as fd:
+        return fd.read()
+
+
 setup(
     name='textdatasetcleaner',
     version='0.0.2',
@@ -8,13 +13,13 @@ setup(
     description='Pipeline for cleaning (preprocessing/normalizing) text datasets',
     url='https://github.com/TextDatasetCleaner/TextDatasetCleaner',
     project_urls={
-        "Documentation": "https://github.com/TextDatasetCleaner/TextDatasetCleaner",
-        "Source Code": "https://github.com/TextDatasetCleaner/TextDatasetCleaner",
-        "Bug Tracker": "https://github.com/TextDatasetCleaner/TextDatasetCleaner/issues",
+        'Documentation': 'https://github.com/TextDatasetCleaner/TextDatasetCleaner',
+        'Source Code': 'https://github.com/TextDatasetCleaner/TextDatasetCleaner',
+        'Bug Tracker': 'https://github.com/TextDatasetCleaner/TextDatasetCleaner/issues',
     },
     license='MIT',
     license_files='LICENSE',
-    long_description=open('README.md', encoding='utf-8').read(),
+    long_description=file_read('README.md'),
     long_description_content_type='text/markdown',
     classifiers=[
         'Development Status :: 3 - Alpha',
@@ -45,7 +50,6 @@ setup(
         'text processing',
         'text mining',
     ],
-
     entry_points={
         'console_scripts': [
             'tdc = textdatasetcleaner.cli:run',
@@ -69,10 +73,10 @@ setup(
         # FIXME: https://github.com/facebookresearch/fastText/issues/1067
         # ('fasttext @ https://github.com/facebookresearch/fastText/archive/'
         # 'a20c0d27cd0ee88a25ea0433b7f03038cd728459.zip#egg=fasttext-0.9.2'),
-
+        #
         # Run `python setup.py sdist bdist_wheel`:
         # Invalid value for requires_dist. Error: Can't have direct dependency 'fasttext @ ...'
-        'fasttext==0.9.2'
+        'fasttext==0.9.2',
     ],
     include_package_data=True,
     python_requires='>=3.6',

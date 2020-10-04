@@ -2,10 +2,10 @@ import re
 from pathlib import Path
 from typing import Optional
 
-from .base import BaseProcessor
+from textdatasetcleaner.processors.base import BaseProcessor
 
 
-DOUBLE_QUOTES = [
+DOUBLE_QUOTES = (
     '«',
     '»',
     '„',
@@ -20,34 +20,34 @@ DOUBLE_QUOTES = [
     # https://github.com/jfilter/clean-text/blob/master/cleantext/constants.py#L97-L114
     '‹',
     '›',
-    "“",
-    "‟",
-    "”",
-    "❝",
-    "❞",
-    "❮",
-    "❯",
-    "〝",
-    "〞",
-    "〟",
-    "＂",
-]
-SINGLE_QUOTES = [
+    '“',
+    '‟',
+    '”',
+    '❝',
+    '❞',
+    '❮',
+    '❯',
+    '〝',
+    '〞',
+    '〟',
+    '＂',
+)
+SINGLE_QUOTES = (
     # https://github.com/jfilter/clean-text/blob/master/cleantext/constants.py#L115
-    "‘",
-    "‛",
-    "’",
-    "❛",
-    "❜",
-    "`",
-    "´",
-]
-DASHES = [
+    '‘',
+    '‛',
+    '’',
+    '❛',
+    '❜',
+    '`',
+    '´',
+)
+DASHES = (
     '—',  # em dash
     '–',  # en dash
     '―',  # horizontal bar
-]
-SPACES = [
+)
+SPACES = (
     # https://www.htmlsymbols.xyz/punctuation-symbols/space-symbols
     # Run in Dev Browser Console:
     # var symbols = '';
@@ -75,20 +75,18 @@ SPACES = [
     '\u2E00',
     '\u3000',
     '\uFEFF',
-
     # spaces 2
     '\u0084',
     '\u0091',
     '\u0096',
     '\u0097',
-
     # spaces 3
     '\u202C',
     '\u200E',
     '\u202A',
     '\x99',
-]
-NON_PRINTABLE = [
+)
+NON_PRINTABLE = (
     # https://github.com/pudo/normality/blob/master/normality/cleaning.py#L10
     # for s in range(ord('\x00'), ord('\x08')): print(f"{chr(s)!r},   #  chr({s})")
     '\x00',  # chr(0)
@@ -149,21 +147,21 @@ NON_PRINTABLE = [
     '\x9c',  # chr(156)
     '\x9d',  # chr(157)
     '\x9e',  # chr(158)
-]
-EXCLAMATIONS = [
+)
+EXCLAMATIONS = (
     # HTTPS://WWW.HTMLSYMBOLS.XYZ/PUNCTUATION-SYMBOLS/EXCLAMATION-MARK
     # '\U0021 == '!'
     '\u00A1',  # ¡
     '\u01C3',  # ǃ
     '\u203C',  # ‼
     '\u2762',  # ❢
-]
-QUESTIONS = [
+)
+QUESTIONS = (
     # https://www.htmlsymbols.xyz/search?q=question
     '\u203D',  # ‽
     '\u00BF',  # ¿
     '\uFF1F',  # ？
-]
+)
 
 RE_SPACE_DOT = re.compile(r'\s+\.\s*')
 RE_MANY_DASH = re.compile(r'[\s\-]{2,}')
@@ -175,26 +173,26 @@ class CleanSymbolsProcessor(BaseProcessor):
     __processor_type__ = 'line'
 
     def process_line(self, line: str) -> Optional[str]:
-        for symbol in DOUBLE_QUOTES:
-            line = line.replace(symbol, '"')
+        for dq_symbol in DOUBLE_QUOTES:
+            line = line.replace(dq_symbol, '"')
 
-        for symbol in SINGLE_QUOTES:
-            line = line.replace(symbol, "'")
+        for sq_symbol in SINGLE_QUOTES:
+            line = line.replace(sq_symbol, "'")
 
-        for symbol in DASHES:
-            line = line.replace(symbol, '-')
+        for d_symbol in DASHES:
+            line = line.replace(d_symbol, '-')
 
-        for symbol in SPACES:
-            line = line.replace(symbol, ' ')
+        for s_symbol in SPACES:
+            line = line.replace(s_symbol, ' ')
 
-        for symbol in NON_PRINTABLE:
-            line = line.replace(symbol, '')
+        for np_symbol in NON_PRINTABLE:
+            line = line.replace(np_symbol, '')
 
-        for symbol in EXCLAMATIONS:
-            line = line.replace(symbol, ' ')
+        for e_symbol in EXCLAMATIONS:
+            line = line.replace(e_symbol, ' ')
 
-        for symbol in QUESTIONS:
-            line = line.replace(symbol, ' ')
+        for q_symbol in QUESTIONS:
+            line = line.replace(q_symbol, ' ')
 
         # duplicate dashes
         if '-' in line:

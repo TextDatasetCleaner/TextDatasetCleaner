@@ -1,9 +1,9 @@
-from typing import Optional
 from pathlib import Path
+from typing import Optional
 
-from selectolax.parser import HTMLParser
+from selectolax.parser import HTMLParser  # type: ignore
 
-from .base import BaseProcessor
+from textdatasetcleaner.processors.base import BaseProcessor
 
 
 class CleanHTMLProcessor(BaseProcessor):

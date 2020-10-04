@@ -1,9 +1,9 @@
 from pathlib import Path
 from typing import Optional
 
-from textacy.preprocessing import normalize_hyphenated_words
+from textacy.preprocessing import normalize_hyphenated_words  # type: ignore
 
-from .base import BaseProcessor
+from textdatasetcleaner.processors.base import BaseProcessor
 
 
 class NormalizeHyphenatedWordsProcessor(BaseProcessor):
@@ -12,6 +12,4 @@ class NormalizeHyphenatedWordsProcessor(BaseProcessor):
     __processor_type__ = 'line'
 
     def process_line(self, line: str) -> Optional[str]:
-        line = normalize_hyphenated_words(line)
-
-        return line
+        return normalize_hyphenated_words(line)

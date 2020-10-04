@@ -47,6 +47,9 @@ jobs:
       - name: Lint with mypy
         run: mypy src
 
+      - name: Find dead code
+        run: vulture src --ignore-names=run
+
 #      - name: Test with pytest
 #        run: |
 #          pytest

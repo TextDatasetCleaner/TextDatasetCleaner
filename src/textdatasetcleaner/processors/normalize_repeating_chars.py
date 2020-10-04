@@ -25,5 +25,7 @@ class NormalizeRepeatingCharsProcessor(BaseProcessor):
                 line = normalize_repeating_chars(line, chars=punct, maxn=1)
         if '....' in line:
             line = normalize_repeating_chars(line, chars='.', maxn=3)
+        elif '..' in line:
+            line = line.replace('..', '...')
 
         return line

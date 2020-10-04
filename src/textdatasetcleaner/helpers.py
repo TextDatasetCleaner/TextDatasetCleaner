@@ -78,5 +78,5 @@ class ClassProperty(object):
     def __init__(self, func: Any) -> None:
         self.func = func
 
-    def __get__(self, obj: Any, owner: Any) -> Any:
+    def __get__(self, _obj: Any, owner: Any) -> Any:
         return self.func(owner)

@@ -10,11 +10,11 @@ class BaseProcessor(ABC):
     __processor_name__: str = ''
     __processor_type__: str = ''
 
-    def __init__(self, *args: Any, **kwargs: Any) -> None:  # noqa: DAR101
+    def __init__(self, *_args: Any, **_kwargs: Any) -> None:  # noqa: DAR101
         """Implement in child class.
 
-        # noqa: DAR101 args
-        # noqa: DAR101 kwargs
+        # noqa: DAR101 _args
+        # noqa: DAR101 _kwargs
         """
 
     def process_line(self, line: str) -> Optional[str]:

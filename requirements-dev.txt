@@ -1,3 +1,5 @@
 wemake-python-styleguide
 mypy
 black
+dlint
+vulture

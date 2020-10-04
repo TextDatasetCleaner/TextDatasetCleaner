@@ -14,7 +14,7 @@ class Loader:
 
         self.previous_temp_file = ''
 
-    def file_processing(self, stage: str):
+    def file_processing(self, stage: str) -> None:
         # TODO: tqdm + logger
         for processor_name in self.config[stage]:
             processor = processors_dict[processor_name]()
@@ -35,7 +35,7 @@ class Loader:
             self._remove_previous_temp(temp_file_path)
             self.input_file = temp_file_path
 
-    def line_processing(self):
+    def line_processing(self) -> None:
         processors = []
         for processor_data in self.config['PROCESSING']:
             params = {}
@@ -62,7 +62,7 @@ class Loader:
                     continue
 
                 for proc in processors:
-                    line = proc.process_line(line)
+                    line = proc.process_line(line)  # type: ignore
                     # TODO: log processed line
                     if not line:    # empty or is None
                         break
@@ -74,11 +74,11 @@ class Loader:
         # TODO: check need remove old input_file
         self.input_file = temp_file_path
 
-    def finish(self):
+    def finish(self) -> None:
         # FIXME: find another way
         os.rename(self.input_file, self.output_file)
 
-    def _remove_previous_temp(self, new_temp_file_path: str = ''):
+    def _remove_previous_temp(self, new_temp_file_path: str = '') -> None:
         if self.previous_temp_file:
             os.remove(self.previous_temp_file)
 

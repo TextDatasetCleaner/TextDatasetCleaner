@@ -5,12 +5,12 @@ from textdatasetcleaner.exceptions import TDCFileExistsError, TDCOSError, TDCTyp
 from textdatasetcleaner.processors import processors_dict, processors_types
 
 
-def check_output_file_not_exists(path: str):
+def check_output_file_not_exists(path: str) -> None:
     if os.path.exists(path):
         raise TDCFileExistsError(f'Output file already exists: {path}')
 
 
-def validate_config(config: dict):
+def validate_config(config: dict) -> None:
     required_parameters = ['PRE_PROCESSING', 'PROCESSING', 'POST_PROCESSING']
     # required + optional
     parameter_types = {
@@ -32,7 +32,7 @@ def validate_config(config: dict):
             raise TDCTypeError(f'Configuration parameter {param_key} must be a type of {parameter_types[param_key]}')
 
 
-def validate_processors(config: dict):
+def validate_processors(config: dict) -> None:
     stage_types = {
         'PRE_PROCESSING': 'file',
         'PROCESSING': 'line',
@@ -66,7 +66,7 @@ def validate_processors(config: dict):
                 raise TDCTypeError(message)
 
 
-def validate_free_space(input_file: str, output_file: str):
+def validate_free_space(input_file: str, output_file: str) -> None:
     file_size = 2.2    # peak: (temp_file + output_file) * 1,1
     file_size *= os.path.getsize(input_file)  # worst case: temp_file = output_file = input_file
 

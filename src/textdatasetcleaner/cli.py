@@ -44,7 +44,7 @@ from textdatasetcleaner.validators import (
     is_flag=True,
     help='Overwrite output file',
 )
-def run(config_file: str, input_file: str, output_file: str, overwrite: bool):
+def run(config_file: str, input_file: str, output_file: str, overwrite: bool) -> None:
     if not overwrite:
         check_output_file_not_exists(output_file)
 

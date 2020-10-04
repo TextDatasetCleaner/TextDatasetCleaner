@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, Type
 
 from textdatasetcleaner.processors.base import BaseProcessor
 from textdatasetcleaner.processors.clean_html import CleanHTMLProcessor
@@ -54,4 +54,4 @@ processors = (
 
 
 processors_types = {proc.name: proc.type for proc in processors}  # type: Dict[str, str]
-processors_dict = {proc.name: proc for proc in processors}  # type: Dict[str, BaseProcessor]
+processors_dict = {proc.name: proc for proc in processors}  # type: Dict[str, Type[BaseProcessor]]

@@ -3,9 +3,9 @@ import re
 from pathlib import Path
 from typing import Optional
 
-from .base import BaseProcessor
-from ..helpers import download_file, get_temp_file_path
-from ..exceptions import TDSValueError
+from textdatasetcleaner.exceptions import TDCValueError
+from textdatasetcleaner.helpers import download_file, get_temp_file_path
+from textdatasetcleaner.processors.base import BaseProcessor
 
 
 class FilterStopWordsProcessor(BaseProcessor):
@@ -75,7 +75,8 @@ class FilterStopWordsProcessor(BaseProcessor):
             'zu',
         ]
         if language_code not in allowed_language:
-            raise TDSValueError(f'Wrong language for {self.name} processor: {language_code}, allowed only: {allowed_language}')
+            msg = f'Wrong language for {self.name} processor: {language_code}, allowed only: {allowed_language}'
+            raise TDCValueError(msg)
         self.language_code = language_code
 
         url = f'https://raw.githubusercontent.com/6/stopwords-json/master/dist/{self.language_code}.json'
@@ -87,13 +88,14 @@ class FilterStopWordsProcessor(BaseProcessor):
             stop_words = fd.read()
 
         stop_words = json.loads(stop_words)
-        stop_words = set(w.replace('|', '') for w in stop_words)
-        stop_words = '|'.join(stop_words)
-        self.stop_words_re = re.compile(rf'\b({stop_words})\b', flags=re.UNICODE | re.IGNORECASE)
+        stop_words_uniq = set(word.replace('|', '') for word in stop_words)
+        stop_words = '|'.join(stop_words_uniq)
+        stop_words_regex = rf'\b({stop_words})\b'
+        self.stop_words_re = re.compile(stop_words_regex, flags=re.UNICODE | re.IGNORECASE)
 
         allowed = ['remove_line', 'replace']
         if mode not in allowed:
-            raise TDSValueError(f'Wrong mode for {self.name} processor: {mode}, allowed only: {allowed}')
+            raise TDCValueError(f'Wrong mode for {self.name} processor: {mode}, allowed only: {allowed}')
 
         self.mode = mode
         self.replace_with = replace_with

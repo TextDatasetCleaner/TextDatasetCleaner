@@ -1,0 +1,34 @@
+[flake8]
+extend-exclude = .*
+
+max-line-length = 120
+extend-ignore =
+    # docstrings
+    D10,
+    # f-strings
+    WPS305,
+    # 'Unnecessary generator - rewrite as a set comprehension': `{}` - is ugly, `set()` - my choice
+    C401,
+    # 'Found commented out code': many false-positives
+    E800,
+    # Found class without a base class
+    WPS306,
+    # 'Found wrong module name': I dont know how to rename 'helpers'
+    WPS100,
+    # 'Found `__init__.py` module with logic': is true, but not for processors/__init__.py
+    WPS412,
+    # 'Found module with too many imports: 25 > 12': processors/__init__.py
+    WPS201,
+
+; Print the total number of errors.
+count = true
+
+; Count the number of occurrences of each error/warning code and print a report.
+statistics = True
+
+# Good variable names which should always be accepted, separated by a comma.
+allowed-domain-names = result,
+             e,
+             param,
+             params,
+             obj,

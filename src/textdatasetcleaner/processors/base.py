@@ -1,35 +1,32 @@
 from abc import ABC
 from typing import Optional
 
-from ..helpers import ClassProperty
-from ..exceptions import TDSNotImplemented
+from textdatasetcleaner.exceptions import TDCNotImplemented
+from textdatasetcleaner.helpers import ClassProperty
 
 
 class BaseProcessor(ABC):
 
-    __processor_name__ = None
-    __processor_type__ = None
+    __processor_name__: str = ''
+    __processor_type__: str = ''
 
     def __init__(self, *args, **kwargs):
-        pass
+        """Implement in child class."""
 
     def process_line(self, line: str) -> Optional[str]:
-        """
-            @:returns: None if need skip this line
-        """
-        raise TDSNotImplemented()
+        raise TDCNotImplemented()
 
     def process_file(self, input_file: str, output_file: str) -> bool:
-        raise TDSNotImplemented()
+        raise TDCNotImplemented()
 
     @ClassProperty
     def name(self):
-        if self.__processor_name__ is None:
-            raise TDSNotImplemented('Processor name not overloaded!')
+        if not self.__processor_name__:
+            raise TDCNotImplemented('Processor name not overloaded!')
         return self.__processor_name__
 
     @ClassProperty
     def type(self):
-        if self.__processor_type__ is None:
-            raise TDSNotImplemented('Processor type not overloaded!')
+        if not self.__processor_type__:
+            raise TDCNotImplemented('Processor type not overloaded!')
         return self.__processor_type__

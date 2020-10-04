@@ -1,9 +1,9 @@
 from pathlib import Path
 from typing import Optional
 
-from textacy.preprocessing import normalize_whitespace
+from textacy.preprocessing import normalize_whitespace  # type: ignore
 
-from .base import BaseProcessor
+from textdatasetcleaner.processors.base import BaseProcessor
 
 
 class NormalizeWhitespaceProcessor(BaseProcessor):
@@ -12,6 +12,4 @@ class NormalizeWhitespaceProcessor(BaseProcessor):
     __processor_type__ = 'line'
 
     def process_line(self, line: str) -> Optional[str]:
-        line = normalize_whitespace(line)
-
-        return line
+        return normalize_whitespace(line)

@@ -1,7 +1,7 @@
 import subprocess
 from pathlib import Path
 
-from .base import BaseProcessor
+from textdatasetcleaner.processors.base import BaseProcessor
 
 
 class UniqueProcessor(BaseProcessor):
@@ -17,8 +17,7 @@ class UniqueProcessor(BaseProcessor):
         with open(output_file, 'w', encoding='utf-8') as fdw:
             p1 = subprocess.Popen(['sort', input_file], stdout=subprocess.PIPE)
             p2 = subprocess.Popen(['uniq'], stdin=p1.stdout, stdout=fdw)
-            p1.stdout.close()
-            p2.communicate()
             p1.wait()
+            p2.communicate()
 
         return p1.returncode == 0 and p2.returncode == 0

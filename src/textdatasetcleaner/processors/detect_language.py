@@ -2,10 +2,10 @@ import os
 from pathlib import Path
 from typing import Optional
 
-from fasttext import load_model
+from fasttext import load_model  # type: ignore
 
-from .base import BaseProcessor
-from ..helpers import download_file, get_line_piece, get_temp_file_path
+from textdatasetcleaner.helpers import download_file, get_line_piece, get_temp_file_path
+from textdatasetcleaner.processors.base import BaseProcessor
 
 
 class DetectLanguageProcessor(BaseProcessor):
@@ -13,8 +13,15 @@ class DetectLanguageProcessor(BaseProcessor):
     __processor_name__ = Path(__file__).resolve().stem
     __processor_type__ = 'line'
 
-    def __init__(self, language_code: str, threshold: float = 0.9, model_path: Optional[str] = None,
-                 model_url: Optional[str] = None, delimiter: Optional[str] = None, delimited_position: int = -1):
+    def __init__(
+        self,
+        language_code: str,
+        threshold: float = 0.9,
+        model_path: str = '',
+        model_url: str = '',
+        delimiter: Optional[str] = None,
+        delimited_position: int = -1,
+    ):
 
         self.language_code = language_code
         self.threshold = threshold

@@ -1,7 +1,7 @@
 import subprocess
 from pathlib import Path
 
-from .base import BaseProcessor
+from textdatasetcleaner.processors.base import BaseProcessor
 
 
 class ShuffleProcessor(BaseProcessor):

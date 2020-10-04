@@ -1,26 +1,26 @@
-class TDSException(Exception):
-    pass
+class TDCException(Exception):
+    """Base TDS Exception."""
 
 
-class TDSValueError(TDSException):
-    pass
+class TDCValueError(TDCException):
+    """ValueError TDC Exception."""
 
 
-class TDSRuntimeError(TDSException):
-    pass
+class TDCRuntimeError(TDCException):
+    """RuntimeError TDC Exception."""
 
 
-class TDSFileExistsError(TDSException):
-    pass
+class TDCFileExistsError(TDCException):
+    """FileExistsError TDC Exception."""
 
 
-class TDSTypeError(TDSException):
-    pass
+class TDCTypeError(TDCException):
+    """TypeError TDC Exception."""
 
 
-class TDSOSError(TDSException):
-    pass
+class TDCOSError(TDCException):
+    """OSError TDC Exception."""
 
 
-class TDSNotImplemented(TDSException):
-    pass
+class TDCNotImplemented(TDCException):
+    """NotImplemented TDC Exception."""

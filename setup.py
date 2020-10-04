@@ -8,7 +8,7 @@ def file_read(path: str) -> str:
 
 setup(
     name='textdatasetcleaner',
-    version='0.0.2',
+    version='0.0.3',
     author='Denis Veselov',
     description='Pipeline for cleaning (preprocessing/normalizing) text datasets',
     url='https://github.com/TextDatasetCleaner/TextDatasetCleaner',

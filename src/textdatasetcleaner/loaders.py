@@ -1,8 +1,9 @@
 import os
+from typing import List
 
 from textdatasetcleaner.exceptions import TDCOSError, TDCRuntimeError, TDCValueError
 from textdatasetcleaner.helpers import get_temp_file_path
-from textdatasetcleaner.processors import processors_dict
+from textdatasetcleaner.processors import BaseProcessor, processors_dict
 
 
 class Loader:
@@ -35,6 +36,42 @@ class Loader:
             self.input_file = temp_file_path
 
     def line_processing(self) -> None:
+        temp_file_path = get_temp_file_path(self.config)
+        processors = self._get_line_processors()
+
+        # TODO: codecs?
+        with open(self.input_file, encoding='utf-8') as fdr:
+            with open(temp_file_path, 'w', encoding='utf-8') as fdw:
+                # TODO: tqdm + logger.debug
+                for line in fdr:
+                    if not line:
+                        continue
+
+                    for proc in processors:
+                        line = proc.process_line(line)  # type: ignore
+                        # TODO: log processed line
+                        if not line:  # empty or is None
+                            break
+
+                    # save after all processors
+                    if line:  # not empty and is not None
+                        fdw.write(f'{line}\n')
+
+        # TODO: check need remove old input_file
+        self.input_file = temp_file_path
+
+    def finish(self) -> None:
+        # FIXME: find another way
+        os.rename(self.input_file, self.output_file)
+
+    def _remove_previous_temp(self, new_temp_file_path: str = '') -> None:
+        if self.previous_temp_file:
+            os.remove(self.previous_temp_file)
+
+        if not new_temp_file_path:
+            self.previous_temp_file = new_temp_file_path
+
+    def _get_line_processors(self) -> List[BaseProcessor]:
         processors = []
         for processor_data in self.config['PROCESSING']:
             params = {}
@@ -51,35 +88,4 @@ class Loader:
             processor = processors_dict[processor_name](**params)
             processors.append(processor)
 
-        temp_file_path = get_temp_file_path(self.config)
-
-        # TODO: codecs?
-        with open(self.input_file, encoding='utf-8') as fdr, open(temp_file_path, 'w', encoding='utf-8') as fdw:
-            # TODO: tqdm + logger.debug
-            for line in fdr:
-                if not line:
-                    continue
-
-                for proc in processors:
-                    line = proc.process_line(line)  # type: ignore
-                    # TODO: log processed line
-                    if not line:  # empty or is None
-                        break
-
-                # save after all processors
-                if line:  # not empty and is not None
-                    fdw.write(f'{line}\n')
-
-        # TODO: check need remove old input_file
-        self.input_file = temp_file_path
-
-    def finish(self) -> None:
-        # FIXME: find another way
-        os.rename(self.input_file, self.output_file)
-
-    def _remove_previous_temp(self, new_temp_file_path: str = '') -> None:
-        if self.previous_temp_file:
-            os.remove(self.previous_temp_file)
-
-        if not new_temp_file_path:
-            self.previous_temp_file = new_temp_file_path
+        return processors

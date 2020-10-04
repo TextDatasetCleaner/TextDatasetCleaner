@@ -1,11 +1,12 @@
 import os
 import tempfile
-from typing import Any, Dict, Optional, Callable
+from typing import Any, Dict, Optional
 
 import requests
 import yaml
 
-from textdatasetcleaner.exceptions import TDCValueError
+from textdatasetcleaner.exceptions import TDCOSError, TDCValueError
+
 
 CHUNK_SIZE = 16384
 
@@ -48,14 +49,28 @@ def get_temp_file_path(config: Optional[Dict[str, Any]] = None) -> str:
         if not os.path.exists(cache_dir):
             os.mkdir(cache_dir)
 
-    if not cache_dir:
-        temp_dir = None
-    else:
+    temp_dir = None
+    if cache_dir:
         temp_dir = cache_dir
 
     _, temp_file_path = tempfile.mkstemp(dir=temp_dir)
 
     return temp_file_path
+
+
+def find_command_path(cmd: str) -> str:
+    cmd_path = [
+        # global
+        f'/usr/bin/{cmd}',
+        # local
+        f'/usr/local/bin/{cmd}',
+    ]
+
+    for path in cmd_path:
+        if os.path.exists(path) and os.access(path, os.X_OK):
+            return path
+
+    raise TDCOSError(f'Command {cmd} not found in system')
 
 
 # TODO: disable setter or find better method

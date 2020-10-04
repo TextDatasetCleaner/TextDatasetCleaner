@@ -53,5 +53,10 @@ processors = (
 )
 
 
-processors_types = {proc.name: proc.type for proc in processors}  # type: Dict[str, str]
-processors_dict = {proc.name: proc for proc in processors}  # type: Dict[str, Type[BaseProcessor]]
+processors_types: Dict[str, str] = {}
+for proc_t in processors:
+    processors_types[proc_t.name] = proc_t.type  # type: ignore
+
+processors_dict: Dict[str, Type[BaseProcessor]] = {}
+for proc_d in processors:
+    processors_dict[proc_d.name] = proc_d  # type: ignore

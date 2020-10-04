@@ -19,6 +19,10 @@ extend-ignore =
     WPS412,
     # 'Found module with too many imports: 25 > 12': processors/__init__.py
     WPS201,
+    # 'Found too deep nesting': FIXME: some cases need be rewritten
+    WPS220,
+    # 'subprocess call - check for execution of untrusted input.': FIXME
+    S603,
 
 ; Print the total number of errors.
 count = true
@@ -32,3 +36,17 @@ allowed-domain-names = result,
              param,
              params,
              obj,
+
+max-local-variables = 10
+
+# 'WPS231 Found too high function cognitive complexity'
+max-cognitive-score = 25
+
+# 'WPS232 Found too high module cognitive complexity'
+max-cognitive-average = 20
+
+# 'WPS230 Found too many public instance attributes'
+max-attributes = 10
+
+# 'WPS211 Found too many arguments'
+max-arguments = 10

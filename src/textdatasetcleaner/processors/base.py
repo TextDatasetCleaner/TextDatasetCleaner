@@ -10,8 +10,12 @@ class BaseProcessor(ABC):
     __processor_name__: str = ''
     __processor_type__: str = ''
 
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
-        """Implement in child class."""
+    def __init__(self, *args: Any, **kwargs: Any) -> None:  # noqa: DAR101
+        """Implement in child class.
+
+        # noqa: DAR101 args
+        # noqa: DAR101 kwargs
+        """
 
     def process_line(self, line: str) -> Optional[str]:
         raise TDCNotImplemented()
@@ -25,7 +29,7 @@ class BaseProcessor(ABC):
             raise TDCNotImplemented('Processor name not overloaded!')
         return self.__processor_name__
 
-    @ClassProperty
+    @ClassProperty  # noqa: WPS125
     def type(self) -> str:
         if not self.__processor_type__:
             raise TDCNotImplemented('Processor type not overloaded!')

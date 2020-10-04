@@ -10,7 +10,7 @@ class BaseProcessor(ABC):
     __processor_name__: str = ''
     __processor_type__: str = ''
 
-    def __init__(self, *_args: Any, **_kwargs: Any) -> None:  # noqa: DAR101
+    def __init__(self, *_args: Any, **_kwargs: Any) -> None:
         """Implement in child class.
 
         # noqa: DAR101 _args

@@ -3,3 +3,4 @@ mypy
 black
 dlint
 vulture
+pytest

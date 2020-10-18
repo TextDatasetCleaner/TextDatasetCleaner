@@ -42,14 +42,17 @@ jobs:
           flake8 . --format=wemake
 
       - name: Lint with black
-        run: black --diff --check --line-length=120 --skip-string-normalization src
+        run: black --diff --check --line-length=120 --skip-string-normalization src tests
 
       - name: Lint with mypy
+        # mypy not used for tests
         run: mypy src
 
       - name: Find dead code
-        run: vulture src --ignore-names=run
+        # run: cli.run
+        # setup: Test*.setup
+        run: vulture src tests --ignore-names=run,setup
 
-#      - name: Test with pytest
-#        run: |
-#          pytest
+      - name: Test with pytest
+        # TODO: coverage run -m pytest -vv && coverage report
+        run: pytest -vv

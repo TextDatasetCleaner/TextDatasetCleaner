@@ -49,7 +49,9 @@ jobs:
         run: mypy src
 
       - name: Find dead code
-        run: vulture src tests --ignore-names=run
+        # run: cli.run
+        # setup: Test*.setup
+        run: vulture src tests --ignore-names=run,setup
 
       - name: Test with pytest
         # TODO: coverage run -m pytest -vv && coverage report

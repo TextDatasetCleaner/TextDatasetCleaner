@@ -186,13 +186,14 @@ class CleanSymbolsProcessor(BaseProcessor):
             line = line.replace(s_symbol, ' ')
 
         for np_symbol in NON_PRINTABLE:
-            line = line.replace(np_symbol, '')
+            # FIXME: если заменять на '', то почему-то replace не срабатывает = валятся тесты
+            line = line.replace(np_symbol, ' ')
 
         for e_symbol in EXCLAMATIONS:
-            line = line.replace(e_symbol, ' ')
+            line = line.replace(e_symbol, '!')
 
         for q_symbol in QUESTIONS:
-            line = line.replace(q_symbol, ' ')
+            line = line.replace(q_symbol, '?')
 
         # duplicate dashes
         if '-' in line:

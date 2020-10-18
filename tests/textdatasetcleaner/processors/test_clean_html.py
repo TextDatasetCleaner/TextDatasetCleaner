@@ -4,7 +4,6 @@ from textdatasetcleaner.processors import CleanHTMLProcessor
 
 
 class TestCleanHTML:
-
     @mark.parametrize('condition', [False, True])
     def test__text(self, condition: bool):
         processor = CleanHTMLProcessor(condition)

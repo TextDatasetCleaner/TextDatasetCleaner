@@ -1,0 +1,55 @@
+name: docker
+
+on:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - ".github/workflows/docker.yml"
+      - "Dockerfile"
+      - "scripts/**"
+      - "src/**"
+      - "setup.py"
+  release:
+    types: [published]
+
+jobs:
+  lint:
+    name: linting Dockerfile
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout the project
+        uses: actions/checkout@v2
+
+      - name: run linter
+        uses: brpaz/hadolint-action@v1.1.0
+        with:
+          dockerfile: "./Dockerfile"
+
+  check:
+    name: check building docker image
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - name: checkout the project
+        uses: actions/checkout@v2
+
+      - name: build the docker image
+        run: docker build .
+
+  publish:
+    if: github.event_name == 'release'
+    name: publish the docker image
+    runs-on: ubuntu-latest
+    needs: check
+    steps:
+      - name: checkout the project
+        uses: actions/checkout@v2
+
+      - name: build the docker image
+        run: docker build -t TextDatasetCleaner/tdc:${GITHUB_REF#refs/tags/} .
+
+      - name: push built image into registry
+        run: |
+          echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login docker.io --username "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
+          docker push TextDatasetCleaner/tdc

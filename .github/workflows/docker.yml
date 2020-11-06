@@ -47,7 +47,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: build the docker image
-        run: docker build -t TextDatasetCleaner/tdc:${GITHUB_REF#refs/tags/} .
+        run: docker build -t TextDatasetCleaner/tdc:${GITHUB_REF#refs/tags/} -t TextDatasetCleaner/tdc:latest .
 
       - name: push built image into registry
         run: |

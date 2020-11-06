@@ -1,5 +1,7 @@
 from typing import Dict, Type
 
+from textdatasetcleaner.processors.add_postfix import AddPostfixProcessor
+from textdatasetcleaner.processors.add_prefix import AddPrefixProcessor
 from textdatasetcleaner.processors.base import BaseProcessor
 from textdatasetcleaner.processors.clean_html import CleanHTMLProcessor
 from textdatasetcleaner.processors.clean_symbols import CleanSymbolsProcessor
@@ -27,6 +29,8 @@ from textdatasetcleaner.processors.unique import UniqueProcessor
 
 
 processors = (
+    AddPostfixProcessor,
+    AddPrefixProcessor,
     CleanHTMLProcessor,
     CleanSymbolsProcessor,
     DetectLanguageProcessor,

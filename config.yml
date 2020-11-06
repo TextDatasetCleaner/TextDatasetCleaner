@@ -28,8 +28,11 @@ PROCESSING:
   - remove_profanity:
       threshold: 0.9
   - clean_symbols
-  # need be last:
   - normalize_whitespace
+  - add_prefix:
+      text: '<|startoftext|>'
+  - add_postfix:
+      text: '<|endoftext|>'
 POST_PROCESSING:
   - unique
   - shuffle

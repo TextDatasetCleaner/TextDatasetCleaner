@@ -1,4 +1,5 @@
 import os
+import shutil
 from typing import List
 
 from textdatasetcleaner.exceptions import TDCOSError, TDCRuntimeError, TDCValueError
@@ -62,7 +63,7 @@ class Loader:
 
     def finish(self) -> None:
         # FIXME: find another way
-        os.rename(self.input_file, self.output_file)
+        shutil.move(self.input_file, self.output_file)
 
     def _remove_previous_temp(self, new_temp_file_path: str = '') -> None:
         if self.previous_temp_file:

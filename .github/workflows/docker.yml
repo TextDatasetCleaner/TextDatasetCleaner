@@ -47,9 +47,9 @@ jobs:
         uses: actions/checkout@v2
 
       - name: build the docker image
-        run: docker build -t TextDatasetCleaner/tdc:${GITHUB_REF#refs/tags/} -t TextDatasetCleaner/tdc:latest .
+        run: docker build -t textdatasetcleaner/tdc:${GITHUB_REF#refs/tags/} -t textdatasetcleaner/tdc:latest .
 
       - name: push built image into registry
         run: |
           echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login docker.io --username "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
-          docker push TextDatasetCleaner/tdc
+          docker push textdatasetcleaner/tdc

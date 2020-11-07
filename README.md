@@ -26,26 +26,26 @@ tdc -c путь_к_вашему_конфигу.yml -i input_file.txt -o output_f
 
 ```bash
 # Скачиваем Docker образ из registry
-docker pull TextDatasetCleaner/tdc:latest
+docker pull textdatasetcleaner/tdc:latest
 
 # Обработать все файлы из директории input
 docker run --rm \
     -v $(pwd)/input/:/tdc/input/ \
     -v $(pwd)/output/:/tdc/output/ \
-    TextDatasetCleaner/tdc
+    textdatasetcleaner/tdc
 
 # Обработать все файлы из директории input с собственной конфигурацией
 docker run --rm \
     -v $(pwd)/input/:/tdc/input/ \
     -v $(pwd)/output/:/tdc/output/ \
     -v $(pwd)/custom-config.yml:/tdc/config.yml \
-    TextDatasetCleaner/tdc
+    textdatasetcleaner/tdc
 
 # Обработать один файл file.txt в директории input
 docker run --rm \
     -v $(pwd)/input/:/tdc/input/ \
     -v $(pwd)/output/:/tdc/output/ \
-    TextDatasetCleaner/tdc \
+    textdatasetcleaner/tdc \
     tdc -c /tdc/config.yml -i /tdc/input/file.txt -o /tdc/output/file.txt
 ```
 

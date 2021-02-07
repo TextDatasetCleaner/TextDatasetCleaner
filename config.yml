@@ -22,6 +22,13 @@ PROCESSING:
   - filter_email
   - filter_emoji
   - filter_hashtags
+  - filter_numbers
+  - filter_phone_number
+  - filter_user_handle
+  - remove_profanity:
+      threshold: 0.9
+  - clean_symbols
+  - normalize_whitespace
   - filter_max_length:
       threshold: 1500
       delimiter: '~'
@@ -30,13 +37,6 @@ PROCESSING:
       threshold: 100
       delimiter: '~'
       delimited_position: -1
-  - filter_numbers
-  - filter_phone_number
-  - filter_user_handle
-  - remove_profanity:
-      threshold: 0.9
-  - clean_symbols
-  - normalize_whitespace
   - add_prefix:
       text: '<|startoftext|>'
   - add_postfix:

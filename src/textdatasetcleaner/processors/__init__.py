@@ -10,6 +10,8 @@ from textdatasetcleaner.processors.filter_currency_symbols import FilterCurrency
 from textdatasetcleaner.processors.filter_email import FilterEmailProcessor
 from textdatasetcleaner.processors.filter_emoji import FilterEmojiProcessor
 from textdatasetcleaner.processors.filter_hashtags import FilterHashtagsProcessor
+from textdatasetcleaner.processors.filter_max_length import FilterMaxLengthProcessor
+from textdatasetcleaner.processors.filter_min_length import FilterMinLengthProcessor
 from textdatasetcleaner.processors.filter_numbers import FilterNumbersProcessor
 from textdatasetcleaner.processors.filter_phone_number import FilterPhoneNumberProcessor
 from textdatasetcleaner.processors.filter_stop_words import FilterStopWordsProcessor
@@ -38,6 +40,8 @@ processors = (
     FilterEmailProcessor,
     FilterEmojiProcessor,
     FilterHashtagsProcessor,
+    FilterMaxLengthProcessor,
+    FilterMinLengthProcessor,
     FilterNumbersProcessor,
     FilterPhoneNumberProcessor,
     FilterStopWordsProcessor,

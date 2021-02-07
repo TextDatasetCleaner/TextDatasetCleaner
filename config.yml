@@ -29,6 +29,14 @@ PROCESSING:
       threshold: 0.9
   - clean_symbols
   - normalize_whitespace
+  - filter_max_length:
+      threshold: 1500
+      delimiter: '~'
+      delimited_position: -1
+  - filter_min_length:
+      threshold: 100
+      delimiter: '~'
+      delimited_position: -1
   - add_prefix:
       text: '<|startoftext|>'
   - add_postfix:

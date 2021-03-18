@@ -48,6 +48,10 @@ class DetectLanguageProcessor(BaseProcessor):
     def process_line(self, line: str) -> Optional[str]:
         line_cpy = get_line_piece(line, self.delimiter, self.delimited_position)
 
+        # if piece empty - dont break full line
+        if not line_cpy:
+            return line
+
         # TODO: `line_cpy = line_cpy.lower()` ?
         result = self.ft.predict(line_cpy, k=1)
 
